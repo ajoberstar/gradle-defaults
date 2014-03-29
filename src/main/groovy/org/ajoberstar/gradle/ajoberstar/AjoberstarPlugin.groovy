@@ -31,10 +31,12 @@ import com.jfrog.bintray.gradle.BintrayPlugin
 import nl.javadude.gradle.plugins.license.License
 
 import org.ajoberstar.gradle.git.plugins.GithubPagesPlugin
+import org.ajoberstar.gradle.imports.OrganizeImportsPlugin
 
 class AjoberstarPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		AjoberstarExtension extension = project.extensions.create('ajoberstar', AjoberstarExtension, project)
+		project.plugins.apply(OrganizeImportsPlugin)
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
