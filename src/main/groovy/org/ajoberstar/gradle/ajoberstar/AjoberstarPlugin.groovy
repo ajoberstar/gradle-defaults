@@ -31,7 +31,9 @@ import com.jfrog.bintray.gradle.BintrayPlugin
 import nl.javadude.gradle.plugins.license.License
 
 import org.ajoberstar.gradle.git.ghpages.GithubPagesPlugin
+import org.ajoberstar.gradle.git.release.GrgitReleasePlugin
 import org.ajoberstar.gradle.imports.OrganizeImportsPlugin
+import org.ajoberstar.grgit.Grgit
 
 class AjoberstarPlugin implements Plugin<Project> {
 	void apply(Project project) {
@@ -42,6 +44,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		addGroovyConfig(project, extension)
 		addLicenseConfig(project, extension)
 		addPublishingConfig(project, extension)
+		addReleaseConfig(project, extension)
 	}
 
 	private void addGhPagesConfig(Project project, AjoberstarExtension extension) {
@@ -200,6 +203,29 @@ class AjoberstarPlugin implements Plugin<Project> {
 						}
 					}
 				}
+			}
+		}
+	}
+
+	private void addReleaseConfig(Project project, AjoberstarExtension extension) {
+		project.plugins.apply(GrgitReleasePlugin)
+		project.release {
+			grgit = Grgit.open(project.file('.'))
+			releaseTasks = ['clean', 'build', 'publishGhPages', 'bintrayUpload']
+			enforceSinceTags = true
+			generateTagMessage = { version ->
+				StringBuilder builder = new StringBuilder()
+				builder.append('Release of ')
+				builder.append(version)
+				builder.append('\n\n')
+				grgit.log {
+					range "v${version.nearest.normal.toString()}^{commit}", 'HEAD'
+				}.inject(builder) { bldr, commit ->
+					bldr.append('- ')
+					bldr.append(commit.shortMessage)
+					bldr.append('\n')
+				}
+				builder.toString()
 			}
 		}
 	}
