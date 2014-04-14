@@ -30,7 +30,7 @@ import org.gradle.api.tasks.bundling.Jar
 import com.jfrog.bintray.gradle.BintrayPlugin
 import nl.javadude.gradle.plugins.license.License
 
-import org.ajoberstar.gradle.git.plugins.GithubPagesPlugin
+import org.ajoberstar.gradle.git.ghpages.GithubPagesPlugin
 import org.ajoberstar.gradle.imports.OrganizeImportsPlugin
 
 class AjoberstarPlugin implements Plugin<Project> {
