@@ -24,6 +24,7 @@ import org.gradle.api.sonar.runner.SonarRunnerPlugin
 import org.gradle.plugins.ide.eclipse.EclipsePlugin
 import org.gradle.plugins.ide.idea.IdeaPlugin
 import org.gradle.api.plugins.GroovyPlugin
+import org.gradle.api.plugins.scala.ScalaPlugin
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
@@ -42,6 +43,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
+		addScalaConfig(project, extension)
 		addLicenseConfig(project, extension)
 		addPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
@@ -120,6 +122,28 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 	}
 
+	private void addScalaConfig(Project project, AjoberstarExtension extension) {
+		project.plugins.withType(ScalaPlugin) {
+			project.githubPages {
+				pages {
+					from(project.scaladoc.outputs.files) {
+						into 'docs/scaladoc'
+					}
+				}
+			}
+
+			Task scaladocJar = project.tasks.create('scaladocJar', Jar)
+			scaladocJar.with {
+				classifier = 'scaladoc'
+				from project.tasks.scaladoc.outputs.files
+			}
+
+			project.artifacts {
+				archives scaladocJar
+			}
+		}
+	}
+
 	private void addLicenseConfig(Project project, AjoberstarExtension extension) {
 		project.plugins.apply('license')
 		project.afterEvaluate {
@@ -138,68 +162,69 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addPublishingConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.apply(MavenPublishPlugin)
-		project.publishing {
-			publications {
-				main(MavenPublication) {
-					project.plugins.withType(JavaPlugin) {
-						from project.components.java
-						artifact project.sourcesJar
-						artifact project.javadocJar
-					}
+		project.plugins.withType(MavenPublishPlugin) {
+			project.publishing {
+				publications {
+					main(MavenPublication) {
+						project.plugins.withType(JavaPlugin) {
+							from project.components.java
+							artifact project.sourcesJar
+							artifact project.javadocJar
+						}
 
-					project.plugins.withType(GroovyPlugin) {
-						artifact project.groovydocJar
-					}
+						project.plugins.withType(GroovyPlugin) {
+							artifact project.groovydocJar
+						}
 
-					pom.withXml {
-						asNode().with {
-							appendNode('name', extension.friendlyName)
-							appendNode('description', extension.description)
-							appendNode('url', "http://github.com/ajoberstar/${project.name}")
-							appendNode('licenses').with {
-								appendNode('license').with {
-									appendNode('name', extension.licenseName)
-									appendNode('url', extension.licenseUrl)
+						pom.withXml {
+							asNode().with {
+								appendNode('name', extension.friendlyName)
+								appendNode('description', extension.description)
+								appendNode('url', "http://github.com/ajoberstar/${project.name}")
+								appendNode('licenses').with {
+									appendNode('license').with {
+										appendNode('name', extension.licenseName)
+										appendNode('url', extension.licenseUrl)
+									}
 								}
-							}
-							appendNode('developers').with {
-								appendNode('developer').with {
-									appendNode('id', 'ajoberstar')
-									appendNode('name', 'Andrew Oberstar')
-									appendNode('email', 'andrew@ajoberstar.org')
+								appendNode('developers').with {
+									appendNode('developer').with {
+										appendNode('id', 'ajoberstar')
+										appendNode('name', 'Andrew Oberstar')
+										appendNode('email', 'andrew@ajoberstar.org')
+									}
 								}
-							}
-							appendNode('scm').with {
-								appendNode('connection', "scm:git:${extension.repoUri}")
-								appendNode('developerConnection', "scm:git:${extension.repoUri}")
-								appendNode('url', extension.repoUri)
+								appendNode('scm').with {
+									appendNode('connection', "scm:git:${extension.repoUri}")
+									appendNode('developerConnection', "scm:git:${extension.repoUri}")
+									appendNode('url', extension.repoUri)
+								}
 							}
 						}
 					}
 				}
+				repositories {
+					mavenLocal()
+				}
 			}
-			repositories {
-				mavenLocal()
-			}
-		}
 
-		project.plugins.apply(BintrayPlugin)
-		if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
-			project.afterEvaluate {
-				project.bintray {
-					user = project.bintrayUser
-					key = project.bintrayKey
-					publications = ['main']
-					pkg {
-						repo = extension.bintrayRepo
-						name = "${project.group}:${project.name}"
-						desc = extension.description
-						licenses = extension.bintrayLicenses
-						labels = extension.bintrayLabels
-						signFiles = true
-						if (project.hasProperty('gpgPassphrase')) {
-							signPassphrase = project.gpgPassphrase
+			project.plugins.apply(BintrayPlugin)
+			if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
+				project.afterEvaluate {
+					project.bintray {
+						user = project.bintrayUser
+						key = project.bintrayKey
+						publications = ['main']
+						pkg {
+							repo = extension.bintrayRepo
+							name = "${project.group}:${project.name}"
+							desc = extension.description
+							licenses = extension.bintrayLicenses
+							labels = extension.bintrayLabels
+							signFiles = true
+							if (project.hasProperty('gpgPassphrase')) {
+								signPassphrase = project.gpgPassphrase
+							}
 						}
 					}
 				}
@@ -211,7 +236,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		project.plugins.apply(GrgitReleasePlugin)
 		project.release {
 			grgit = Grgit.open(project.file('.'))
-			releaseTasks = ['clean', 'build', 'publishGhPages', 'bintrayUpload']
+			releaseTasks = ['clean', 'build', 'publishGhPages']
 			enforceSinceTags = true
 			generateTagMessage = { version ->
 				StringBuilder builder = new StringBuilder()
@@ -227,6 +252,10 @@ class AjoberstarPlugin implements Plugin<Project> {
 				}
 				builder.toString()
 			}
+		}
+
+		project.plugins.withType(BintrayPlugin) {
+			project.release.releaseTasks << 'bintrayUpload'
 		}
 	}
 }

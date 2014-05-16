@@ -10,7 +10,7 @@ buildscript {
 }
 
 group = 'org.ajoberstar'
-version = '0.2.0'
+version = '0.2.0-milestone.1'
 
 apply plugin: 'groovy'
 apply from: rootProject.file('gradle/publishing.gradle')
