@@ -39,7 +39,6 @@ import org.ajoberstar.grgit.Grgit
 class AjoberstarPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		AjoberstarExtension extension = project.extensions.create('ajoberstar', AjoberstarExtension, project)
-		project.plugins.apply(OrganizeImportsPlugin)
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
@@ -47,6 +46,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		addLicenseConfig(project, extension)
 		addPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
+		addOrderingRules(project, extension)
 	}
 
 	private void addGhPagesConfig(Project project, AjoberstarExtension extension) {
@@ -65,6 +65,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 			project.plugins.apply(SonarRunnerPlugin)
 			project.plugins.apply(EclipsePlugin)
 			project.plugins.apply(IdeaPlugin)
+			project.plugins.apply(OrganizeImportsPlugin)
 
 			project.jacoco.toolVersion = '0.7.0.201403182114'
 
@@ -256,6 +257,22 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 		project.plugins.withType(BintrayPlugin) {
 			project.release.releaseTasks << 'bintrayUpload'
+		}
+	}
+
+	private void addOrderingRules(Project project, AjoberstarExtension extension) {
+		def clean = project.tasks['clean']
+		project.tasks.all { task ->
+			if (task != clean) {
+				task.shouldRunAfter clean
+			}
+		}
+
+		def build = project.tasks['build']
+		project.tasks.all { task ->
+			if (task.group == 'publishing') {
+				task.shouldRunAfter build
+			}
 		}
 	}
 }

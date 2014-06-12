@@ -4,13 +4,14 @@ buildscript {
 		maven { url 'http://dl.bintray.com/ajoberstar/temp-forks' }
 	}
 	dependencies {
+		// classpath 'org.ajoberstar:gradle-ajoberstar:0.1.3'
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4-fork+2014.03.28.05.40.09'
 		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	}
 }
 
 group = 'org.ajoberstar'
-version = '0.2.0-milestone.1'
+version = '0.2.0'
 
 apply plugin: 'groovy'
 apply from: rootProject.file('gradle/publishing.gradle')
@@ -26,7 +27,7 @@ repositories {
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.ajoberstar:gradle-git:0.8.0'
+	compile 'org.ajoberstar:gradle-git:0.9.0'
 	compile 'org.ajoberstar:gradle-imports:0.1.0'
 	compile 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
 	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4-fork+2014.03.28.05.40.09'
