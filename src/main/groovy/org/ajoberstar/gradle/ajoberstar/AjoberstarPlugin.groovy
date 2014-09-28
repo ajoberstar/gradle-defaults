@@ -227,11 +227,11 @@ class AjoberstarPlugin implements Plugin<Project> {
 		project.plugins.apply('org.ajoberstar.release-opinion')
 		project.release {
 			grgit = Grgit.open(project.file('.'))
-			releaseTasks = ['clean', 'build', 'publishGhPages']
 		}
+		project.tasks.release.dependsOn 'clean', 'build', 'publishGhPages'
 
 		project.plugins.withId('bintray') {
-			project.release.releaseTasks << 'bintrayUpload'
+			project.tasks.release.dependsOn 'bintrayUpload'
 		}
 	}
 }
