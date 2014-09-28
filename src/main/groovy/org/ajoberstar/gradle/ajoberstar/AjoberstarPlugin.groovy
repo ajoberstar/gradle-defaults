@@ -199,8 +199,9 @@ class AjoberstarPlugin implements Plugin<Project> {
 					mavenLocal()
 				}
 			}
+		}
 
-			project.plugins.apply('bintray')
+		project.plugins.withId('bintray') {
 			if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
 				project.afterEvaluate {
 					project.bintray {
