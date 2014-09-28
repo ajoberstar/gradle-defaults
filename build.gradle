@@ -1,20 +1,29 @@
+
 buildscript {
 	repositories {
 		jcenter()
+		maven { url 'http://dl.bintray.com/ajoberstar/gradle-plugins' }
 		maven { url 'http://dl.bintray.com/ajoberstar/temp-forks' }
 	}
 	dependencies {
-		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4-fork+2014.03.28.05.40.09'
-		classpath 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
+		classpath 'org.ajoberstar:gradle-ajoberstar:0.2.0'
 	}
 }
 
-group = 'org.ajoberstar'
-version = '0.2.0-milestone.1'
-
 apply plugin: 'groovy'
-apply from: rootProject.file('gradle/publishing.gradle')
-apply from: rootProject.file('gradle/license.gradle')
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
+apply plugin: 'ajoberstar'
+
+group = 'org.ajoberstar'
+
+ajoberstar {
+	friendlyName = 'Ajoberstar Gradle Plugin'
+	description = 'Plugin for org.ajoberstar projects.'
+	bintrayRepo = 'gradle-plugins'
+	bintrayLabels = ['gradle']
+	copyrightYears = '2014'
+}
 
 sourceCompatibility = '1.7'
 
@@ -26,33 +35,12 @@ repositories {
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.ajoberstar:gradle-git:0.8.0'
+	compile 'org.ajoberstar:gradle-git:0.11.0-milestone.2+0deeba0'
 	compile 'org.ajoberstar:gradle-imports:0.1.0'
-	compile 'nl.javadude.gradle.plugins:license-gradle-plugin:0.7.0'
+	compile 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
 	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4-fork+2014.03.28.05.40.09'
 }
 
-task sourcesJar(type:Jar) {
-	classifier = 'sources'
-	from sourceSets.main.allSource
-}
-
-task javadocJar(type:Jar) {
-	classifier = 'javadoc'
-	from javadoc.outputs.files
-}
-
-task groovydocJar(type:Jar) {
-	classifier = 'groovydoc'
-	from groovydoc.outputs.files
-}
-
-artifacts {
-	archives sourcesJar
-	archives javadocJar
-	archives groovydocJar
-}
-
 wrapper {
-	gradleVersion = '1.11'
+	gradleVersion = '2.1'
 }

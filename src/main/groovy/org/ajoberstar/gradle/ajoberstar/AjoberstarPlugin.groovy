@@ -15,31 +15,20 @@
  */
 package org.ajoberstar.gradle.ajoberstar
 
-import org.gradle.api.Project
-import org.gradle.api.Plugin
-import org.gradle.api.Task
-import org.gradle.api.plugins.JavaPlugin
-import org.gradle.testing.jacoco.plugins.JacocoPlugin
-import org.gradle.api.sonar.runner.SonarRunnerPlugin
-import org.gradle.plugins.ide.eclipse.EclipsePlugin
-import org.gradle.plugins.ide.idea.IdeaPlugin
-import org.gradle.api.plugins.GroovyPlugin
-import org.gradle.api.plugins.scala.ScalaPlugin
-import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.bundling.Jar
-import com.jfrog.bintray.gradle.BintrayPlugin
 import nl.javadude.gradle.plugins.license.License
 
-import org.ajoberstar.gradle.git.ghpages.GithubPagesPlugin
-import org.ajoberstar.gradle.git.release.GrgitReleasePlugin
-import org.ajoberstar.gradle.imports.OrganizeImportsPlugin
 import org.ajoberstar.grgit.Grgit
+
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.Task
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.api.tasks.bundling.Jar
 
 class AjoberstarPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		AjoberstarExtension extension = project.extensions.create('ajoberstar', AjoberstarExtension, project)
-		project.plugins.apply(OrganizeImportsPlugin)
+		project.plugins.apply('organize-imports')
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
@@ -50,7 +39,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addGhPagesConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.apply(GithubPagesPlugin)
+		project.plugins.apply('org.ajoberstar.github-pages')
 		project.githubPages {
 			repoUri = extension.repoUri
 			pages {
@@ -60,13 +49,11 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addJavaConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.withType(JavaPlugin) {
-			project.plugins.apply(JacocoPlugin)
-			project.plugins.apply(SonarRunnerPlugin)
-			project.plugins.apply(EclipsePlugin)
-			project.plugins.apply(IdeaPlugin)
-
-			project.jacoco.toolVersion = '0.7.0.201403182114'
+		project.plugins.withId('java') {
+			project.plugins.apply('jacoco')
+			project.plugins.apply('sonar-runner')
+			project.plugins.apply('eclipse')
+			project.plugins.apply('idea')
 
 			project.githubPages {
 				pages {
@@ -96,7 +83,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addGroovyConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.withType(GroovyPlugin) {
+		project.plugins.withId('groovy') {
 			project.sonarRunner.sonarProperties {
 				property 'sonar.language', 'grvy'
 			}
@@ -123,7 +110,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addScalaConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.withType(ScalaPlugin) {
+		project.plugins.withId('scala') {
 			project.githubPages {
 				pages {
 					from(project.scaladoc.outputs.files) {
@@ -162,18 +149,22 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addPublishingConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.withType(MavenPublishPlugin) {
+		project.plugins.withId('maven-publish') {
 			project.publishing {
 				publications {
 					main(MavenPublication) {
-						project.plugins.withType(JavaPlugin) {
+						project.plugins.withId('java') {
 							from project.components.java
 							artifact project.sourcesJar
 							artifact project.javadocJar
 						}
 
-						project.plugins.withType(GroovyPlugin) {
+						project.plugins.withId('groovy') {
 							artifact project.groovydocJar
+						}
+
+						project.plugins.withId('scala') {
+							artifact project.scaladocJar
 						}
 
 						pom.withXml {
@@ -208,7 +199,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 				}
 			}
 
-			project.plugins.apply(BintrayPlugin)
+			project.plugins.apply('bintray')
 			if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
 				project.afterEvaluate {
 					project.bintray {
@@ -233,28 +224,13 @@ class AjoberstarPlugin implements Plugin<Project> {
 	}
 
 	private void addReleaseConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.apply(GrgitReleasePlugin)
+		project.plugins.apply('org.ajoberstar.release-opinion')
 		project.release {
 			grgit = Grgit.open(project.file('.'))
 			releaseTasks = ['clean', 'build', 'publishGhPages']
-			enforceSinceTags = true
-			generateTagMessage = { version ->
-				StringBuilder builder = new StringBuilder()
-				builder.append('Release of ')
-				builder.append(version)
-				builder.append('\n\n')
-				grgit.log {
-					range "v${version.nearest.normal.toString()}^{commit}", 'HEAD'
-				}.inject(builder) { bldr, commit ->
-					bldr.append('- ')
-					bldr.append(commit.shortMessage)
-					bldr.append('\n')
-				}
-				builder.toString()
-			}
 		}
 
-		project.plugins.withType(BintrayPlugin) {
+		project.plugins.withId('bintray') {
 			project.release.releaseTasks << 'bintrayUpload'
 		}
 	}
