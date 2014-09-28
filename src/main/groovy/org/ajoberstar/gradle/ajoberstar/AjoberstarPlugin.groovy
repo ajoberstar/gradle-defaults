@@ -36,6 +36,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		addLicenseConfig(project, extension)
 		addPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
+		addOrderingRules(project, extension)
 	}
 
 	private void addGhPagesConfig(Project project, AjoberstarExtension extension) {
@@ -232,6 +233,22 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 		project.plugins.withId('bintray') {
 			project.tasks.release.dependsOn 'bintrayUpload'
+		}
+	}
+
+	private void addOrderingRules(Project project, AjoberstarExtension extension) {
+		def clean = project.tasks['clean']
+		project.tasks.all { task ->
+			if (task != clean) {
+				task.shouldRunAfter clean
+			}
+		}
+
+		def build = project.tasks['build']
+		project.tasks.all { task ->
+			if (task.group == 'publishing') {
+				task.shouldRunAfter build
+			}
 		}
 	}
 }
