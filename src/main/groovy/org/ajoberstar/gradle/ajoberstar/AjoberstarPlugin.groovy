@@ -201,22 +201,40 @@ class AjoberstarPlugin implements Plugin<Project> {
 			}
 		}
 
-		project.plugins.withId('bintray') {
+		project.plugins.withId('com.jfrog.bintray') {
 			if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
 				project.afterEvaluate {
+					def bintrayAttributes = [:]
+					if (extension.bintrayLabels.contains('gradle')) {
+						def pluginIds = project.fileTree(
+							dir: 'src/main/resources/META-INF/gradle-plugins',
+							include: '*.properties').collect { file -> file.name[0..(file.name.lastIndexOf('.'))] }
+						bintrayAttributes = ['gradle-plugin': pluginIds.collect { "${it}:${project.group}:${project.name}" }.join(',')]
+					}
 					project.bintray {
 						user = project.bintrayUser
 						key = project.bintrayKey
 						publications = ['main']
+						publish = true
 						pkg {
 							repo = extension.bintrayRepo
 							name = "${project.group}:${project.name}"
 							desc = extension.description
+							websiteUrl = "https://github.com/ajoberstar/${project.name}"
+							issueTrackerUrl = "https://github.com/ajoberstar/${project.name}/issues"
+							vcsUrl = "https://github.com/ajoberstar/${project.name}.git"
 							licenses = extension.bintrayLicenses
 							labels = extension.bintrayLabels
-							signFiles = true
-							if (project.hasProperty('gpgPassphrase')) {
-								signPassphrase = project.gpgPassphrase
+							publicDownloadNumbers = true
+							version {
+								vcsTag = "v${project.version}"
+								attributes = bintrayAttributes
+								gpg {
+									sign = true
+									if (project.hasProperty('gpgPassphrase')) {
+										passphrase = project.gpgPassphrase
+									}
+								}
 							}
 						}
 					}
@@ -232,7 +250,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		}
 		project.tasks.release.dependsOn 'clean', 'build', 'publishGhPages'
 
-		project.plugins.withId('bintray') {
+		project.plugins.withId('com.jfrog.bintray') {
 			project.tasks.release.dependsOn 'bintrayUpload'
 		}
 	}

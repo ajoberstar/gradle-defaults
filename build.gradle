@@ -29,7 +29,6 @@ sourceCompatibility = '1.7'
 
 repositories {
 	jcenter()
-	maven { url 'http://dl.bintray.com/ajoberstar/temp-forks' }
 }
 
 dependencies {
@@ -38,7 +37,7 @@ dependencies {
 	compile 'org.ajoberstar:gradle-git:0.11.0-rc.2+3c2e190'
 	compile 'org.ajoberstar:gradle-imports:0.1.0'
 	compile 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
-	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.4-fork+2014.03.28.05.40.09'
+	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
 }
 
 wrapper {
