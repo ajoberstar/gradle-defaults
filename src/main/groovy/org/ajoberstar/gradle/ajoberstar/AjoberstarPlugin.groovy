@@ -204,7 +204,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 					if (extension.bintrayLabels.contains('gradle')) {
 						def pluginIds = project.fileTree(
 							dir: 'src/main/resources/META-INF/gradle-plugins',
-							include: '*.properties').collect { file -> file.name[0..(file.name.lastIndexOf('.'))] }
+							include: '*.properties').collect { file -> file.name[0..(file.name.lastIndexOf('.') - 1)] }
 						bintrayAttributes = ['gradle-plugin': pluginIds.collect { "${it}:${project.group}:${project.name}" }.join(',')]
 					}
 					project.bintray {
