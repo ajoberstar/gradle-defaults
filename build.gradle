@@ -5,7 +5,7 @@ buildscript {
 		maven { url 'http://dl.bintray.com/ajoberstar/gradle-plugins' }
 	}
 	dependencies {
-		classpath 'org.ajoberstar:gradle-ajoberstar:0.3.0-rc.2+d64adef'
+		classpath 'org.ajoberstar:gradle-ajoberstar:0.3.1'
 	}
 }
 
