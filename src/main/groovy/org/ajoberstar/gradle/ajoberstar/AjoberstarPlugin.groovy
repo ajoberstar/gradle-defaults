@@ -85,10 +85,6 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 	private void addGroovyConfig(Project project, AjoberstarExtension extension) {
 		project.plugins.withId('groovy') {
-			project.sonarRunner.sonarProperties {
-				property 'sonar.language', 'grvy'
-			}
-
 			project.githubPages {
 				pages {
 					from(project.groovydoc.outputs.files) {
