@@ -42,15 +42,17 @@ class DefaultsExtension {
 	String copyrightYears
 
 	DefaultsExtension(Project project) {
-		this.bintrayPkg = "${project.group}:${project.name}"
+		project.afterEvaluate {
+			this.bintrayPkg = bintrayPkg ?: "${project.group}:${project.name}"
 
-		this.siteUrl = "https://github.com/${id}/${project.name}"
-		this.issuesUrl = "${siteUrl}/issues"
-		this.vcsReadUrl = "${siteUrl}.git"
-		this.vcsWriteUrl = "git@github.com:${id}/${project.name}.git"
+			this.siteUrl = siteUrl ?: "https://github.com/${id}/${project.name}"
+			this.issuesUrl = issuesUrl ?: "${siteUrl}/issues"
+			this.vcsReadUrl = vcsReadUrl ?: "${siteUrl}.git"
+			this.vcsWriteUrl = vcsWriteUrl ?: "git@github.com:${id}/${project.name}.git"
 
-		this.licenseKey = 'Apache-2.0'
-		this.licenseName = 'The Apache Software License, Version 2.0'
-		this.licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0'
+			this.licenseKey = licenseKey ?: 'Apache-2.0'
+			this.licenseName = licenseName ?: 'The Apache Software License, Version 2.0'
+			this.licenseUrl = licenseUrl ?: 'http://www.apache.org/licenses/LICENSE-2.0'
+		}
 	}
 }

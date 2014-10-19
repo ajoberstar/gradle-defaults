@@ -44,10 +44,12 @@ class DefaultsPlugin implements Plugin<Project> {
 
 	private void addGhPagesConfig(Project project, DefaultsExtension extension) {
 		project.plugins.apply('org.ajoberstar.github-pages')
-		project.githubPages {
-			repoUri = extension.repoUri
-			pages {
-				from 'src/gh-pages'
+		project.afterEvaluate {
+			project.githubPages {
+				repoUri = extension.vcsWriteUrl
+				pages {
+					from 'src/gh-pages'
+				}
 			}
 		}
 	}
@@ -213,9 +215,9 @@ class DefaultsPlugin implements Plugin<Project> {
 									}
 								}
 								if (extension.developers) {
-									appendNode('developers').with {
+									appendNode('developers').with { node ->
 										extension.developers.each { developer ->
-											appendNode('developer').with {
+											node.appendNode('developer').with {
 												appendNode('id', developer.id)
 												appendNode('name', developer.name)
 												appendNode('email', developer.email)
@@ -224,9 +226,9 @@ class DefaultsPlugin implements Plugin<Project> {
 									}
 								}
 								if (extension.contributors) {
-									appendNode('contributors').with {
+									appendNode('contributors').with { node ->
 										extension.contributors.each { contributor ->
-											appendNode('contributor').with {
+											node.appendNode('contributor').with {
 												appendNode('id', contributor.id)
 												appendNode('name', contributor.name)
 												appendNode('email', contributor.email)
