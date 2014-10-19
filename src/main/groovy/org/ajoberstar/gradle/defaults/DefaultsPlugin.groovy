@@ -29,7 +29,7 @@ class DefaultsPlugin implements Plugin<Project> {
 
 	void apply(Project project) {
 		DefaultsExtension extension = project.extensions.create('defaults', DefaultsExtension, project)
-		project.plugins.apply('organize-imports')
+		project.plugins.apply('org.ajoberstar.organize-imports')
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
