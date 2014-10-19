@@ -24,6 +24,12 @@ ajoberstar {
 	copyrightYears = '2014'
 }
 
+project.afterEvaluate {
+	bintray.pkg {
+		licenses = ['Apache-2.0']
+	}
+}
+
 sourceCompatibility = '1.7'
 
 repositories {
