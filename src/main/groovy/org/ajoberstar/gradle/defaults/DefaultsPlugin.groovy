@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.ajoberstar.gradle.ajoberstar
+package org.ajoberstar.gradle.defaults
 
 import nl.javadude.gradle.plugins.license.License
 
@@ -25,21 +25,24 @@ import org.gradle.api.Task
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 
-class AjoberstarPlugin implements Plugin<Project> {
+class DefaultsPlugin implements Plugin<Project> {
+
 	void apply(Project project) {
-		AjoberstarExtension extension = project.extensions.create('ajoberstar', AjoberstarExtension, project)
+		DefaultsExtension extension = project.extensions.create('defaults', DefaultsExtension, project)
 		project.plugins.apply('organize-imports')
 		addGhPagesConfig(project, extension)
 		addJavaConfig(project, extension)
 		addGroovyConfig(project, extension)
 		addScalaConfig(project, extension)
 		addLicenseConfig(project, extension)
-		addPublishingConfig(project, extension)
+		addMavenPublishingConfig(project, extension)
+		addBintrayPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
 		addOrderingRules(project, extension)
 	}
 
-	private void addGhPagesConfig(Project project, AjoberstarExtension extension) {
+
+	private void addGhPagesConfig(Project project, DefaultsExtension extension) {
 		project.plugins.apply('org.ajoberstar.github-pages')
 		project.githubPages {
 			repoUri = extension.repoUri
@@ -49,7 +52,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		}
 	}
 
-	private void addJavaConfig(Project project, AjoberstarExtension extension) {
+	private void addJavaConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('java') {
 			project.plugins.apply('jacoco')
 			project.plugins.apply('sonar-runner')
@@ -83,7 +86,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		}
 	}
 
-	private void addGroovyConfig(Project project, AjoberstarExtension extension) {
+	private void addGroovyConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('groovy') {
 			project.githubPages {
 				pages {
@@ -106,7 +109,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 	}
 
-	private void addScalaConfig(Project project, AjoberstarExtension extension) {
+	private void addScalaConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('scala') {
 			project.githubPages {
 				pages {
@@ -128,7 +131,7 @@ class AjoberstarPlugin implements Plugin<Project> {
 		}
 	}
 
-	private void addLicenseConfig(Project project, AjoberstarExtension extension) {
+	private void addLicenseConfig(Project project, DefaultsExtension extension) {
 		project.plugins.apply('license')
 		project.afterEvaluate {
 			project.license {
@@ -145,7 +148,35 @@ class AjoberstarPlugin implements Plugin<Project> {
 		}
 	}
 
-	private void addPublishingConfig(Project project, AjoberstarExtension extension) {
+	private void addReleaseConfig(Project project, DefaultsExtension extension) {
+		project.plugins.apply('org.ajoberstar.release-opinion')
+		project.release {
+			grgit = Grgit.open(project.file('.'))
+		}
+		project.tasks.release.dependsOn 'clean', 'build', 'publishGhPages'
+
+		project.plugins.withId('com.jfrog.bintray') {
+			project.tasks.release.dependsOn 'bintrayUpload'
+		}
+	}
+
+	private void addOrderingRules(Project project, DefaultsExtension extension) {
+		def clean = project.tasks['clean']
+		project.tasks.all { task ->
+			if (task != clean) {
+				task.shouldRunAfter clean
+			}
+		}
+
+		def build = project.tasks['build']
+		project.tasks.all { task ->
+			if (task.group == 'publishing') {
+				task.shouldRunAfter build
+			}
+		}
+	}
+
+	private void addMavenPublishingConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('maven-publish') {
 			project.publishing {
 				publications {
@@ -166,26 +197,47 @@ class AjoberstarPlugin implements Plugin<Project> {
 
 						pom.withXml {
 							asNode().with {
-								appendNode('name', extension.friendlyName)
-								appendNode('description', extension.description)
-								appendNode('url', "http://github.com/ajoberstar/${project.name}")
+								appendNode('name', project.name)
+								appendNode('description', project.description)
+								appendNode('url', extension.siteUrl)
+								if (extension.orgName) {
+									appendNode('organization').with {
+										appendNode('name', extension.orgName)
+										appendNode('url', extension.orgUrl)
+									}
+								}
 								appendNode('licenses').with {
 									appendNode('license').with {
 										appendNode('name', extension.licenseName)
 										appendNode('url', extension.licenseUrl)
 									}
 								}
-								appendNode('developers').with {
-									appendNode('developer').with {
-										appendNode('id', 'ajoberstar')
-										appendNode('name', 'Andrew Oberstar')
-										appendNode('email', 'andrew@ajoberstar.org')
+								if (extension.developers) {
+									appendNode('developers').with {
+										extension.developers.each { developer ->
+											appendNode('developer').with {
+												appendNode('id', developer.id)
+												appendNode('name', developer.name)
+												appendNode('email', developer.email)
+											}
+										}
+									}
+								}
+								if (extension.contributors) {
+									appendNode('contributors').with {
+										extension.contributors.each { contributor ->
+											appendNode('contributor').with {
+												appendNode('id', contributor.id)
+												appendNode('name', contributor.name)
+												appendNode('email', contributor.email)
+											}
+										}
 									}
 								}
 								appendNode('scm').with {
-									appendNode('connection', "scm:git:${extension.repoUri}")
-									appendNode('developerConnection', "scm:git:${extension.repoUri}")
-									appendNode('url', extension.repoUri)
+									appendNode('connection', "scm:git:${extension.vcsReadUrl}")
+									appendNode('developerConnection', "scm:git:${extension.vcsWriteUrl}")
+									appendNode('url', extension.siteUrl)
 								}
 							}
 						}
@@ -196,7 +248,9 @@ class AjoberstarPlugin implements Plugin<Project> {
 				}
 			}
 		}
+	}
 
+	private void addBintrayPublishingConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('com.jfrog.bintray') {
 			if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
 				project.afterEvaluate {
@@ -213,13 +267,16 @@ class AjoberstarPlugin implements Plugin<Project> {
 						publications = ['main']
 						publish = true
 						pkg {
+							if (extension.orgName) {
+								userOrg = extension.id
+							}
 							repo = extension.bintrayRepo
-							name = "${project.group}:${project.name}"
-							desc = extension.description
-							websiteUrl = "https://github.com/ajoberstar/${project.name}"
-							issueTrackerUrl = "https://github.com/ajoberstar/${project.name}/issues"
-							vcsUrl = "https://github.com/ajoberstar/${project.name}.git"
-							licenses = extension.bintrayLicenses
+							name = extension.bintrayPkg
+							desc = project.description
+							websiteUrl = extension.siteUrl
+							issueTrackerUrl = extension.issuesUrl
+							vcsUrl = extension.vcsReadUrl
+							licenses = [extension.licenseKey]
 							labels = extension.bintrayLabels
 							publicDownloadNumbers = true
 							version {
@@ -235,34 +292,6 @@ class AjoberstarPlugin implements Plugin<Project> {
 						}
 					}
 				}
-			}
-		}
-	}
-
-	private void addReleaseConfig(Project project, AjoberstarExtension extension) {
-		project.plugins.apply('org.ajoberstar.release-opinion')
-		project.release {
-			grgit = Grgit.open(project.file('.'))
-		}
-		project.tasks.release.dependsOn 'clean', 'build', 'publishGhPages'
-
-		project.plugins.withId('com.jfrog.bintray') {
-			project.tasks.release.dependsOn 'bintrayUpload'
-		}
-	}
-
-	private void addOrderingRules(Project project, AjoberstarExtension extension) {
-		def clean = project.tasks['clean']
-		project.tasks.all { task ->
-			if (task != clean) {
-				task.shouldRunAfter clean
-			}
-		}
-
-		def build = project.tasks['build']
-		project.tasks.all { task ->
-			if (task.group == 'publishing') {
-				task.shouldRunAfter build
 			}
 		}
 	}
