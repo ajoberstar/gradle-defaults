@@ -1,33 +1,25 @@
-
-buildscript {
-	repositories {
-		jcenter()
-		maven { url 'http://dl.bintray.com/ajoberstar/gradle-plugins' }
-	}
-	dependencies {
-		classpath 'org.ajoberstar:gradle-ajoberstar:0.3.2'
-	}
-}
-
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'ajoberstar'
 
-group = 'org.ajoberstar'
-
-ajoberstar {
-	friendlyName = 'Gradle Defaults Plugin'
-	description = 'Plugin providing opinionated defaults for Gradle projects.'
-	bintrayRepo = 'gradle-plugins'
-	bintrayLabels = ['gradle']
-	copyrightYears = '2014'
+plugins {
+	id 'com.jfrog.bintray' version '0.6'
+	id 'org.ajoberstar.defaults' version '0.4.0-rc.1'
 }
 
-project.afterEvaluate {
-	bintray.pkg {
-		licenses = ['Apache-2.0']
-	}
+group = 'org.ajoberstar'
+description = 'Plugin providing opinionated defaults for Gradle projects.'
+
+defaults {
+	id = 'ajoberstar'
+
+	bintrayRepo = 'gradle-plugins'
+	bintrayLabels = ['gradle']
+
+	developers = [
+		[id: 'ajoberstar', name: 'Andrew Oberstar', email: 'andrew@ajoberstar.org']
+	]
+
+	copyrightYears = '2014'
 }
 
 sourceCompatibility = '1.7'
