@@ -1,9 +1,19 @@
-plugins {
-	id 'groovy'
-	id 'maven-publish'
-	id 'com.jfrog.bintray' version '0.6'
-	id 'org.ajoberstar.defaults' version '0.4.0-rc.1'
+// plugins {
+// 	id 'groovy'
+// 	id 'maven-publish'
+// 	id 'com.jfrog.bintray' version '0.6'
+// 	id 'org.ajoberstar.defaults' version '0.4.0-rc.1'
+// }
+
+buildscript {
+	repositories { jcenter() }
+	dependencies { classpath 'org.ajoberstar:gradle-defaults:0.4.0-rc.1' }
 }
+
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.ajoberstar.defaults'
 
 group = 'org.ajoberstar'
 description = 'Plugin providing opinionated defaults for Gradle projects.'
