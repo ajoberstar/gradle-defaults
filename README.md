@@ -95,6 +95,13 @@ defaults {
 
 ## Release Notes
 
+### v0.5.0
+
+- Automatically configures the Bintray plugins `mavenCentralSync` with the
+following project properties:
+	- `sonatypeUsername`
+	- `sonatypePassword`
+
 ### v0.4.0
 
 - Initial release after refactoring from `gradle-ajoberstar`.
