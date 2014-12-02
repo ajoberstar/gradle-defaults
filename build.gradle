@@ -2,7 +2,7 @@ plugins {
 	id 'groovy'
 	id 'maven-publish'
 	id 'com.jfrog.bintray' version '1.0'
-	id 'org.ajoberstar.defaults' version '0.5.0-rc.1'
+	id 'org.ajoberstar.defaults' version '0.5.0-rc.3'
 }
 
 group = 'org.ajoberstar'
