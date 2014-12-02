@@ -295,7 +295,7 @@ class DefaultsPlugin implements Plugin<Project> {
 										user = project.sonatypeUsername
 									}
 									if (project.hasProperty('sonatypePassword')) {
-										user = project.sonatypePassword
+										password = project.sonatypePassword
 									}
 								}
 							}
