@@ -30,10 +30,10 @@ repositories {
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
-	compile 'org.ajoberstar:gradle-git:0.13.0'
+	compile 'org.ajoberstar:gradle-git:1.0.0'
 	compile 'org.ajoberstar:gradle-imports:1.0.1'
 	compile 'nl.javadude.gradle.plugins:license-gradle-plugin:0.11.0'
-	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+	compile 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
 }
 
 wrapper {
