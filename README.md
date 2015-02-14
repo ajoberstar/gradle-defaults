@@ -4,6 +4,7 @@ Plugin providing opinionated defaults for Gradle builds.
 
 [![Build Status](https://travis-ci.org/ajoberstar/gradle-defaults.png?branch=master)](https://travis-ci.org/ajoberstar/gradle-defaults)
 [![Maintainer Status](http://stillmaintained.com/ajoberstar/gradle-defaults.png)](http://stillmaintained.com/ajoberstar/gradle-defaults)
+[ ![Download](https://api.bintray.com/packages/ajoberstar/gradle-plugins/org.ajoberstar%3Agradle-defaults/images/download.svg) ](https://bintray.com/ajoberstar/gradle-plugins/org.ajoberstar%3Agradle-defaults/_latestVersion)
 
 ## Core Functionality
 
