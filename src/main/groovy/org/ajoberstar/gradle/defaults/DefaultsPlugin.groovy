@@ -261,7 +261,7 @@ class DefaultsPlugin implements Plugin<Project> {
 						def pubs = []
 						project.rootProject.allprojects { prj ->
 							prj.plugins.withId('maven-publish') {
-								prj.publications.publications.all { pub ->
+								prj.publishing.publications.all { pub ->
 									pubs << pub
 								}
 							}
