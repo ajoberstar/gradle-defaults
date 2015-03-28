@@ -36,12 +36,12 @@ class DefaultsPlugin implements Plugin<Project> {
 		addReleaseConfig(project, extension)
 
 		project.allprojects { prj ->
-			addJavaConfig(project, extension)
-			addGroovyConfig(project, extension)
-			addScalaConfig(project, extension)
-			addLicenseConfig(project, extension)
-			addMavenPublishingConfig(project, extension)
-			addOrderingRules(project, extension)
+			addJavaConfig(prj, extension)
+			addGroovyConfig(prj, extension)
+			addScalaConfig(prj, extension)
+			addLicenseConfig(prj, extension)
+			addMavenPublishingConfig(prj, extension)
+			addOrderingRules(prj, extension)
 		}
 	}
 
