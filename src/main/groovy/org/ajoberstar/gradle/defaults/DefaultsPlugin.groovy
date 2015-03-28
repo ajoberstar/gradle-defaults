@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2014-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,20 +30,37 @@ class DefaultsPlugin implements Plugin<Project> {
 	void apply(Project project) {
 		DefaultsExtension extension = project.extensions.create('defaults', DefaultsExtension, project)
 		project.plugins.apply('org.ajoberstar.organize-imports')
+
 		addGhPagesConfig(project, extension)
-		addJavaConfig(project, extension)
-		addGroovyConfig(project, extension)
-		addScalaConfig(project, extension)
-		addLicenseConfig(project, extension)
-		addMavenPublishingConfig(project, extension)
 		addBintrayPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
-		addOrderingRules(project, extension)
+
+		project.allprojects { prj ->
+			addJavaConfig(project, extension)
+			addGroovyConfig(project, extension)
+			addScalaConfig(project, extension)
+			addLicenseConfig(project, extension)
+			addMavenPublishingConfig(project, extension)
+			addOrderingRules(project, extension)
+		}
 	}
 
 
 	private void addGhPagesConfig(Project project, DefaultsExtension extension) {
 		project.plugins.apply('org.ajoberstar.github-pages')
+
+		def addOutput = { task ->
+			project.githubPages.pages.from(task.outputs.files) {
+				into "docs${task.path}".replace(':', '/')
+			}
+		}
+
+		project.allprojects { prj ->
+			prj.plugins.withId('java') { addOutput(prj.javadoc) }
+			prj.plugins.withId('groovy') { addOutput(prj.groovydoc) }
+			prj.plugins.withId('scala') { addOutput(prj.scaladoc) }
+		}
+
 		project.afterEvaluate {
 			project.githubPages {
 				repoUri = extension.vcsWriteUrl
@@ -60,14 +77,6 @@ class DefaultsPlugin implements Plugin<Project> {
 			project.plugins.apply('sonar-runner')
 			project.plugins.apply('eclipse')
 			project.plugins.apply('idea')
-
-			project.githubPages {
-				pages {
-					from(project.javadoc.outputs.files) {
-						into 'docs/javadoc'
-					}
-				}
-			}
 
 			Task sourcesJar = project.tasks.create('sourcesJar', Jar)
 			sourcesJar.with {
@@ -90,14 +99,6 @@ class DefaultsPlugin implements Plugin<Project> {
 
 	private void addGroovyConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('groovy') {
-			project.githubPages {
-				pages {
-					from(project.groovydoc.outputs.files) {
-						into 'docs/groovydoc'
-					}
-				}
-			}
-
 			Task groovydocJar = project.tasks.create('groovydocJar', Jar)
 			groovydocJar.with {
 				classifier = 'groovydoc'
@@ -113,14 +114,6 @@ class DefaultsPlugin implements Plugin<Project> {
 
 	private void addScalaConfig(Project project, DefaultsExtension extension) {
 		project.plugins.withId('scala') {
-			project.githubPages {
-				pages {
-					from(project.scaladoc.outputs.files) {
-						into 'docs/scaladoc'
-					}
-				}
-			}
-
 			Task scaladocJar = project.tasks.create('scaladocJar', Jar)
 			scaladocJar.with {
 				classifier = 'scaladoc'
@@ -263,10 +256,25 @@ class DefaultsPlugin implements Plugin<Project> {
 							include: '*.properties').collect { file -> file.name[0..(file.name.lastIndexOf('.') - 1)] }
 						bintrayAttributes = ['gradle-plugin': pluginIds.collect { "${it}:${project.group}:${project.name}" }]
 					}
+
+					def allPublications = {
+						def pubs = []
+						project.rootProject.allprojects { prj ->
+							prj.plugins.withId('maven-publish') {
+								prj.publications.publications.all { pub ->
+									pubs << pub
+								}
+							}
+						}
+						pubs
+					}
+
 					project.bintray {
 						user = project.bintrayUser
 						key = project.bintrayKey
-						publications = ['main']
+
+						publications = allPublications()
+
 						publish = true
 						pkg {
 							if (extension.orgName) {

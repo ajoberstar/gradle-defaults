@@ -18,7 +18,7 @@ defaults {
 		[id: 'ajoberstar', name: 'Andrew Oberstar', email: 'andrew@ajoberstar.org']
 	]
 
-	copyrightYears = '2014'
+	copyrightYears = '2014-2015'
 }
 
 sourceCompatibility = '1.7'
@@ -37,5 +37,5 @@ dependencies {
 }
 
 wrapper {
-	gradleVersion = '2.2'
+	gradleVersion = '2.3'
 }
