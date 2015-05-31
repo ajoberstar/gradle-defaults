@@ -32,7 +32,6 @@ class DefaultsPlugin implements Plugin<Project> {
 		project.plugins.apply('org.ajoberstar.organize-imports')
 
 		addGhPagesConfig(project, extension)
-		addBintrayPublishingConfig(project, extension)
 		addReleaseConfig(project, extension)
 
 		project.allprojects { prj ->
@@ -41,6 +40,7 @@ class DefaultsPlugin implements Plugin<Project> {
 			addScalaConfig(prj, extension)
 			addLicenseConfig(prj, extension)
 			addMavenPublishingConfig(prj, extension)
+            addBintrayPublishingConfig(project, extension)
 			addOrderingRules(prj, extension)
 		}
 	}
@@ -257,23 +257,11 @@ class DefaultsPlugin implements Plugin<Project> {
 						bintrayAttributes = ['gradle-plugin': pluginIds.collect { "${it}:${project.group}:${project.name}" }]
 					}
 
-					def allPublications = {
-						def pubs = []
-						project.rootProject.allprojects { prj ->
-							prj.plugins.withId('maven-publish') {
-								prj.publishing.publications.all { pub ->
-									pubs << pub
-								}
-							}
-						}
-						pubs
-					}
-
 					project.bintray {
 						user = project.bintrayUser
 						key = project.bintrayKey
 
-						publications = allPublications()
+						publications = ['main']
 
 						publish = true
 						pkg {
