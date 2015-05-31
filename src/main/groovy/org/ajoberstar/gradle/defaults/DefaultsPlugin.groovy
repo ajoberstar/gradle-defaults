@@ -151,8 +151,9 @@ class DefaultsPlugin implements Plugin<Project> {
         def releaseTask = project.tasks.release
         releaseTask.dependsOn 'publishGhPages'
         project.allprojects { prj ->
-            releaseTask.dependsOn prj.clean, prj.build
-
+            prj.plugins.withId('org.gradle.base') {
+                releaseTask.dependsOn prj.clean, prj.build
+            }
             prj.plugins.withId('com.jfrog.bintray') {
                 releaseTask.dependsOn prj.bintrayUpload
             }
