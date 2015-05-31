@@ -26,6 +26,7 @@ class DefaultsExtension {
 	String bintrayRepo
 	String bintrayPkg
 	String bintrayLabels
+    boolean bintrayToCentral = true
 
 	Set developers
 	Set contributors

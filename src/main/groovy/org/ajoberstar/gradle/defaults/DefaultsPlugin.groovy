@@ -291,14 +291,16 @@ class DefaultsPlugin implements Plugin<Project> {
 										passphrase = project.gpgPassphrase
 									}
 								}
-								mavenCentralSync {
-									if (project.hasProperty('sonatypeUsername')) {
-										user = project.sonatypeUsername
-									}
-									if (project.hasProperty('sonatypePassword')) {
-										password = project.sonatypePassword
-									}
-								}
+                                if (extension.bintrayToCentral) {
+    								mavenCentralSync {
+								    	if (project.hasProperty('sonatypeUsername')) {
+								    		user = project.sonatypeUsername
+								    	}
+								    	if (project.hasProperty('sonatypePassword')) {
+								    		password = project.sonatypePassword
+								    	}
+								    }
+                                }
 							}
 						}
 					}
