@@ -148,11 +148,15 @@ class DefaultsPlugin implements Plugin<Project> {
 		project.release {
 			grgit = Grgit.open(project.file('.'))
 		}
-		project.tasks.release.dependsOn 'clean', 'build', 'publishGhPages'
+        def releaseTask = project.tasks.release
+        releaseTask.dependsOn 'publishGhPages'
+        project.allprojects { prj ->
+            releaseTask.dependsOn prj.clean, prj.build
 
-		project.plugins.withId('com.jfrog.bintray') {
-			project.tasks.release.dependsOn 'bintrayUpload'
-		}
+            prj.plugins.withId('com.jfrog.bintray') {
+                releaseTask.dependsOn prj.bintrayUpload
+            }
+        }
 	}
 
 	private void addOrderingRules(Project project, DefaultsExtension extension) {
