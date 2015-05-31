@@ -40,7 +40,7 @@ class DefaultsPlugin implements Plugin<Project> {
 			addScalaConfig(prj, extension)
 			addLicenseConfig(prj, extension)
 			addMavenPublishingConfig(prj, extension)
-            addBintrayPublishingConfig(project, extension)
+            addBintrayPublishingConfig(prj, extension)
 			addOrderingRules(prj, extension)
 		}
 	}
