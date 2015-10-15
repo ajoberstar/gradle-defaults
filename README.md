@@ -11,8 +11,8 @@ Plugin providing opinionated defaults for Gradle builds.
 
 Currently, the defaults aren't terribly easy to override or pick and choose from. Please submit an issue if you find anything you would like to be more configurable.
 
-- Applies `organize-imports` plugin.
-- Applies `org.ajoberstar.github-pages` plugin. Configures to use:
+- Applies [`organize-imports`](https://github.com/ajoberstar/gradle-imports) plugin.
+- Applies [`org.ajoberstar.github-pages`](https://github.com/ajoberstar/gradle-git) plugin. Configures to use:
 	- Extension's `vcsWriteUrl`.
 	- Publish content from `src/gh-pages`.
 - If `java` plugin applied:
@@ -28,13 +28,13 @@ Currently, the defaults aren't terribly easy to override or pick and choose from
 - If `scala` plugin applied:
 	- Configure `org.ajoberstar.github-pages` to deploy `docs/scaladoc`.
 	- Add tasks and artifacts for `-scaladoc.jar`.
-- Applies `license` plugin.
+- Applies [`license`](https://github.com/hierynomus/license-gradle-plugin) plugin.
 	- Uses license header from `gradle/HEADER`
 		- Substitutes extensions' `copyrightYears` for `${year}` in header.
 	- Enforces strict checking.
 	- Disables normal mappings and sets `groovy` and `java` files to use slashstar style instead of default javadoc style.
 	- Excludes properties files from checks.
-- Applies `org.ajoberstar.release-opinion` plugin.
+- Applies [`org.ajoberstar.release-opinion`](https://github.com/ajoberstar/gradle-git) plugin.
 	- Configures to use the project's root dir as the repository.
 	- Configures the `release` task to depend on `clean`, `build` and `publishGhPages`.
 	- If `com.jfrog.bintray` applied:
@@ -50,7 +50,7 @@ Currently, the defaults aren't terribly easy to override or pick and choose from
 		- `-groovydoc.jar`
 		- `-scaladoc.jar`
 	- Configures the POM with information from project and extension.
-- If `com.jfrog.bintray` applied and `bintrayUser` and `bintrayKey` properties are set on the project:
+- If [`com.jfrog.bintray`](https://github.com/bintray/gradle-bintray-plugin) applied and `bintrayUser` and `bintrayKey` properties are set on the project:
 	- If the extension's `bintrayLabels` includes `gradle`:
 		- Set the `gradle-plugin` attribute to support the Gradle plugin portal for any plugin IDs in `src/main/resources`.
 	- Publishes the `main` publication.
