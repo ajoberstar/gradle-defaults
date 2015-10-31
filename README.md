@@ -1,5 +1,7 @@
 # gradle-defaults
 
+**NOTE:** Consider this an experimental plugin. It works for my use case, but I don't consider any of it stable.
+
 Plugin providing opinionated defaults for Gradle builds.
 
 [![Build Status](https://travis-ci.org/ajoberstar/gradle-defaults.png?branch=master)](https://travis-ci.org/ajoberstar/gradle-defaults)
@@ -94,16 +96,3 @@ defaults {
 	copyrightYears = '2013-2014'
 }
 ```
-
-## Release Notes
-
-### v0.5.0
-
-- Automatically configures the Bintray plugins `mavenCentralSync` with the
-following project properties:
-	- `sonatypeUsername`
-	- `sonatypePassword`
-
-### v0.4.0
-
-- Initial release after refactoring from `gradle-ajoberstar`.
