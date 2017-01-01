@@ -36,7 +36,7 @@ class DefaultsPlugin implements Plugin<Project> {
 			addJavaConfig(prj)
 			addGroovyConfig(prj)
 			addMavenPublishingConfig(prj)
-      addBintrayPublishingConfig(prj)
+      addGradlePluginConfig(prj)
 			addOrderingRules(prj)
 		}
 	}
@@ -169,7 +169,7 @@ class DefaultsPlugin implements Plugin<Project> {
 				repositories {
 					mavenLocal()
           maven {
-            url = "https://api.bintray.com/maven/ajoberstar/maven/${project.rootProject.name}/;publish=1"
+            url = "https://api.bintray.com/maven/${System.env['BINTRAY_USER']}/maven/${project.rootProject.name}/;publish=1"
             credentials {
               username = System.env['BINTRAY_USER']
               password = System.env['BINTRAY_KEY']
@@ -178,5 +178,34 @@ class DefaultsPlugin implements Plugin<Project> {
 				}
 			}
 		}
+	}
+
+	private void addGradlePluginConfig(Project project) {
+		project.plugins.withId('java-gradle-plugin') {
+      project.sourceSets {
+          compatTest
+      }
+
+      project.gradlePlugin {
+          testSourceSets sourceSets.compatTest
+      }
+
+      project.task compatTest
+      project.check.dependsOn compatTest
+
+      project.supportedGradleVersions.each { gradleVersion ->
+          def task = project.tasks.create("compatTest${gradleVersion}", Test) {
+              testClassesDir = project.sourceSets.compatTest.output.classesDir
+              classpath = project.sourceSets.compatTest.runtimeClasspath
+              systemProperty 'compat.gradle.version', gradleVersion
+          }
+          project.compatTest.dependsOn task
+      }
+		}
+
+    project.plugins.withId('com.gradle.plugin-publish') {
+      // a special plugin publication will exist. don't try to duplicate it
+      project.publishMainPublicationToBintrayRepository.enabled = false
+    }
 	}
 }
