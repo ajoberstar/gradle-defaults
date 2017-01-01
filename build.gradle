@@ -3,10 +3,17 @@ plugins {
 	id 'maven-publish'
 	id 'com.jfrog.bintray' version '1.2'
 	id 'org.ajoberstar.defaults' version '0.5.3'
+  id 'org.sonarqube' version '2.2.1'
 }
 
 group = 'org.ajoberstar'
 description = 'Plugin providing opinionated defaults for Gradle projects.'
+
+sonarqube {
+    properties {
+        property 'sonar.projectVersion', version.toString().split('-')[0]
+    }
+}
 
 defaults {
 	id = 'ajoberstar'
