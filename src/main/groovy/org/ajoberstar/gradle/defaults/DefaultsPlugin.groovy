@@ -60,6 +60,7 @@ class DefaultsPlugin implements Plugin<Project> {
     }
 
     project.gitPublish {
+      branch = 'gh-pages'
       contents {
         from 'src/gh-pages'
       }
