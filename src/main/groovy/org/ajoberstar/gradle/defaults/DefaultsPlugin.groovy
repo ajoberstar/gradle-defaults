@@ -70,7 +70,7 @@ class DefaultsPlugin implements Plugin<Project> {
     project.plugins.apply('org.sonarqube')
     project.sonarqube {
       properties {
-          property 'sonar.projectVersion', version.toString().split('-')[0]
+          property 'sonar.projectVersion', project.version.toString().split('-')[0]
       }
     }
   }
