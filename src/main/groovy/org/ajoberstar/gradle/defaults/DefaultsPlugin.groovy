@@ -49,7 +49,7 @@ class DefaultsPlugin implements Plugin<Project> {
     project.plugins.apply('org.ajoberstar.git-publish')
 
     def addOutput = { task ->
-      project.gitPublish.pages.from(task.outputs.files) {
+      project.gitPublish.contents.from(task.outputs.files) {
         into "docs${task.path}".replace(':', '/')
       }
     }
