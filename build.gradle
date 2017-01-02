@@ -50,6 +50,10 @@ dependencies {
   compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
 }
 
+// temporary
+licenseMain.enabled=false
+licenseTest.enabled=false
+
 spotless {
   java {
     googleJavaFormat()
