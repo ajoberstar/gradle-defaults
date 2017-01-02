@@ -78,7 +78,14 @@ class DefaultsPlugin implements Plugin<Project> {
   private void addReleaseConfig(Project project) {
     project.plugins.apply('org.ajoberstar.semver-vcs-grgit')
     project.plugins.apply('org.ajoberstar.release-experimental')
+
+    def tagTask = project.tasks.create('tagVersion') {
+      def version = project.version.toString()
+      project.grgit.tag.add(name: version, message: "v${version}")
+    }
+
     def releaseTask = project.tasks.release
+    releaseTask.dependsOn tagTask
     releaseTask.dependsOn 'gitPublishPush'
     project.allprojects { prj ->
         prj.plugins.withId('org.gradle.base') {
