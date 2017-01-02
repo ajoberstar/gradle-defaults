@@ -38,7 +38,6 @@ class DefaultsPlugin implements Plugin<Project> {
       addGroovyConfig(prj)
       addPublishingConfig(prj)
       addPluginConfig(prj)
-      addReleaseConfig(prj)
       addOrderingRules(prj)
     }
   }
@@ -73,6 +72,24 @@ class DefaultsPlugin implements Plugin<Project> {
       properties {
           property 'sonar.projectVersion', version.toString().split('-')[0]
       }
+    }
+  }
+
+  private void addReleaseConfig(Project project) {
+    project.plugins.apply('org.ajoberstar.semver-vcs-grgit')
+    project.plugins.apply('org.ajoberstar.release-experimental')
+    def releaseTask = project.tasks.release
+    releaseTask.dependsOn 'gitPublishPush'
+    project.allprojects { prj ->
+        prj.plugins.withId('org.gradle.base') {
+            releaseTask.dependsOn prj.clean, prj.build
+        }
+        prj.plugins.withId('maven-publish') {
+            releaseTask.dependsOn prj.publish
+        }
+        prj.plugins.withId('com.gradle.plugin-publish') {
+            releaseTask.dependsOn prj.publishPlugins
+        }
     }
   }
 
@@ -160,24 +177,6 @@ class DefaultsPlugin implements Plugin<Project> {
       project.configurations.all {
         exclude group: 'org.codehaus.groovy'
       }
-    }
-  }
-
-  private void addReleaseConfig(Project project) {
-    project.plugins.apply('org.ajoberstar.semver-vcs-grgit')
-    project.plugins.apply('org.ajoberstar.release-experimental')
-    def releaseTask = project.tasks.release
-    releaseTask.dependsOn 'gitPublishPush'
-    project.allprojects { prj ->
-        prj.plugins.withId('org.gradle.base') {
-            releaseTask.dependsOn prj.clean, prj.build
-        }
-        prj.plugins.withId('maven-publish') {
-            releaseTask.dependsOn prj.publish
-        }
-        prj.plugins.withId('com.gradle.plugin-publish') {
-            releaseTask.dependsOn prj.publishPlugins
-        }
     }
   }
 
