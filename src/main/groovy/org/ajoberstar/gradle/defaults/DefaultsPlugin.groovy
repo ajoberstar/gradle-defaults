@@ -154,7 +154,7 @@ class DefaultsPlugin implements Plugin<Project> {
       project.plugins.apply('com.gradle.plugin-publish')
 
       // remove duplicate publication
-      project.gradleDevelopment.automatedPublishing = false
+      project.gradlePlugin.automatedPublishing = false
 
       // avoid conflict with localGroovy()
       project.configurations.all {
