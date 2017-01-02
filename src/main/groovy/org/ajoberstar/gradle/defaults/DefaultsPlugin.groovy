@@ -80,8 +80,10 @@ class DefaultsPlugin implements Plugin<Project> {
     project.plugins.apply('org.ajoberstar.release-experimental')
 
     def tagTask = project.tasks.create('tagVersion') {
-      def version = project.version.toString()
-      project.grgit.tag.add(name: version, message: "v${version}")
+      doLast {
+        def version = project.version.toString()
+        project.grgit.tag.add(name: version, message: "v${version}")
+      }
     }
 
     def releaseTask = project.tasks.release
