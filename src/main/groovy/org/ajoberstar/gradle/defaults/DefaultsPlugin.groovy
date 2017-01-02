@@ -23,45 +23,46 @@ import org.gradle.api.tasks.bundling.Jar
 
 class DefaultsPlugin implements Plugin<Project> {
 
-	void apply(Project project) {
+  void apply(Project project) {
     if (project.rootProject != project) {
       throw new GradleException('org.ajoberstar.defaults must only be applied to the root project')
     }
-		addGit(project)
+    addGit(project)
     addSonar(project)
-		addReleaseConfig(project)
+    addReleaseConfig(project)
 
-		project.allprojects { prj ->
+    project.allprojects { prj ->
       addSpotless(project)
-			addJavaConfig(prj)
-			addGroovyConfig(prj)
-			addMavenPublishingConfig(prj)
+      addJavaConfig(prj)
+      addGroovyConfig(prj)
+      addMavenPublishingConfig(prj)
       addGradlePluginConfig(prj)
-			addOrderingRules(prj)
-		}
-	}
+      addOrderingRules(prj)
+    }
+  }
 
 
-	private void addGit(Project project) {
-		project.plugins.apply('org.ajoberstar.git-publish')
+  private void addGit(Project project) {
+    project.plugins.apply('org.ajoberstar.grgit')
+    project.plugins.apply('org.ajoberstar.git-publish')
 
-		def addOutput = { task ->
-			project.githubPages.pages.from(task.outputs.files) {
-				into "docs${task.path}".replace(':', '/')
-			}
-		}
+    def addOutput = { task ->
+      project.githubPages.pages.from(task.outputs.files) {
+        into "docs${task.path}".replace(':', '/')
+      }
+    }
 
-		project.allprojects { prj ->
-			prj.plugins.withId('java') { addOutput(prj.javadoc) }
-			prj.plugins.withId('groovy') { addOutput(prj.groovydoc) }
-		}
+    project.allprojects { prj ->
+      prj.plugins.withId('java') { addOutput(prj.javadoc) }
+      prj.plugins.withId('groovy') { addOutput(prj.groovydoc) }
+    }
 
-		project.gitPublish {
-			contents {
-				from 'src/gh-pages'
-			}
-		}
-	}
+    project.gitPublish {
+      contents {
+        from 'src/gh-pages'
+      }
+    }
+  }
 
   private void addSonar(Project project) {
     project.plugins.apply('org.sonarqube')
@@ -76,7 +77,6 @@ class DefaultsPlugin implements Plugin<Project> {
     project.plugins.apply('com.diffplug.gradle.spotless')
     project.spotless {
       java {
-        target 'src/**/*.java'
         googleJavaFormat()
         licenseHeaderFile project.rootProject.file('gradle/HEADER')
       }
@@ -85,41 +85,47 @@ class DefaultsPlugin implements Plugin<Project> {
         trimTrailingWhitespace()
         indentWithSpaces(2)
         endWithNewline()
-        licenseHeaderFile project.rootProject.file('gradle/HEADER')
+        licenseHeaderFile project.rootProject.file('gradle/HEADER'), 'package '
+      }
+      format 'gradle', {
+        target '**/build.gradle'
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
       }
     }
   }
 
-	private void addJavaConfig(Project project) {
-		project.plugins.withId('java') {
-			project.plugins.apply('jacoco')
+  private void addJavaConfig(Project project) {
+    project.plugins.withId('java') {
+      project.plugins.apply('jacoco')
 
-			Task sourcesJar = project.tasks.create('sourcesJar', Jar)
-			sourcesJar.with {
-				classifier = 'sources'
-				from project.sourceSets.main.allSource
-			}
+      Task sourcesJar = project.tasks.create('sourcesJar', Jar)
+      sourcesJar.with {
+        classifier = 'sources'
+        from project.sourceSets.main.allSource
+      }
 
-			Task javadocJar = project.tasks.create('javadocJar', Jar)
-			javadocJar.with {
-				classifier = 'javadoc'
-				from project.tasks.javadoc.outputs.files
-			}
-		}
-	}
+      Task javadocJar = project.tasks.create('javadocJar', Jar)
+      javadocJar.with {
+        classifier = 'javadoc'
+        from project.tasks.javadoc.outputs.files
+      }
+    }
+  }
 
-	private void addGroovyConfig(Project project) {
-		project.plugins.withId('groovy') {
-			Task groovydocJar = project.tasks.create('groovydocJar', Jar)
-			groovydocJar.with {
-				classifier = 'groovydoc'
-				from project.tasks.groovydoc.outputs.files
-			}
-		}
-	}
+  private void addGroovyConfig(Project project) {
+    project.plugins.withId('groovy') {
+      Task groovydocJar = project.tasks.create('groovydocJar', Jar)
+      groovydocJar.with {
+        classifier = 'groovydoc'
+        from project.tasks.groovydoc.outputs.files
+      }
+    }
+  }
 
-	private void addReleaseConfig(Project project) {
-		project.plugins.apply('org.ajoberstar.release-experimental')
+  private void addReleaseConfig(Project project) {
+    project.plugins.apply('org.ajoberstar.release-experimental')
     def releaseTask = project.tasks.release
     releaseTask.dependsOn 'gitPublishPush'
     project.allprojects { prj ->
@@ -130,44 +136,44 @@ class DefaultsPlugin implements Plugin<Project> {
             releaseTask.dependsOn prj.publish
         }
     }
-	}
+  }
 
-	private void addOrderingRules(Project project) {
-		project.plugins.withId('org.gradle.base') {
-			def clean = project.tasks['clean']
-			project.tasks.all { task ->
-				if (task != clean) {
-					task.shouldRunAfter clean
-				}
-			}
+  private void addOrderingRules(Project project) {
+    project.plugins.withId('org.gradle.base') {
+      def clean = project.tasks['clean']
+      project.tasks.all { task ->
+        if (task != clean) {
+          task.shouldRunAfter clean
+        }
+      }
 
-			def build = project.tasks['build']
-			project.tasks.all { task ->
-				if (task.group == 'publishing') {
-					task.shouldRunAfter build
-				}
-			}
-		}
-	}
+      def build = project.tasks['build']
+      project.tasks.all { task ->
+        if (task.group == 'publishing') {
+          task.shouldRunAfter build
+        }
+      }
+    }
+  }
 
-	private void addMavenPublishingConfig(Project project) {
-		project.plugins.withId('maven-publish') {
-			project.publishing {
-				publications {
-					main(MavenPublication) {
-						project.plugins.withId('java') {
-							from project.components.java
-							artifact project.sourcesJar
-							artifact project.javadocJar
-						}
+  private void addMavenPublishingConfig(Project project) {
+    project.plugins.withId('maven-publish') {
+      project.publishing {
+        publications {
+          main(MavenPublication) {
+            project.plugins.withId('java') {
+              from project.components.java
+              artifact project.sourcesJar
+              artifact project.javadocJar
+            }
 
-						project.plugins.withId('groovy') {
-							artifact project.groovydocJar
-						}
-					}
-				}
-				repositories {
-					mavenLocal()
+            project.plugins.withId('groovy') {
+              artifact project.groovydocJar
+            }
+          }
+        }
+        repositories {
+          mavenLocal()
           maven {
             url = "https://api.bintray.com/maven/${System.env['BINTRAY_USER']}/maven/${project.rootProject.name}/;publish=1"
             credentials {
@@ -175,13 +181,13 @@ class DefaultsPlugin implements Plugin<Project> {
               password = System.env['BINTRAY_KEY']
             }
           }
-				}
-			}
-		}
-	}
+        }
+      }
+    }
+  }
 
-	private void addGradlePluginConfig(Project project) {
-		project.plugins.withId('java-gradle-plugin') {
+  private void addGradlePluginConfig(Project project) {
+    project.plugins.withId('java-gradle-plugin') {
       project.sourceSets {
           compatTest
       }
@@ -201,11 +207,11 @@ class DefaultsPlugin implements Plugin<Project> {
           }
           project.compatTest.dependsOn task
       }
-		}
+    }
 
     project.plugins.withId('com.gradle.plugin-publish') {
       // a special plugin publication will exist. don't try to duplicate it
       project.publishMainPublicationToBintrayRepository.enabled = false
     }
-	}
+  }
 }

@@ -1,9 +1,10 @@
 plugins {
-	id 'groovy'
-	id 'maven-publish'
-	id 'com.jfrog.bintray' version '1.2'
-	id 'org.ajoberstar.defaults' version '0.5.3'
+  id 'groovy'
+  id 'maven-publish'
+  id 'com.jfrog.bintray' version '1.2'
+  id 'org.ajoberstar.defaults' version '0.5.3'
   id 'org.sonarqube' version '2.2.1'
+  id 'com.diffplug.gradle.spotless' version '2.4.1'
 }
 
 group = 'org.ajoberstar'
@@ -16,38 +17,59 @@ sonarqube {
 }
 
 defaults {
-	id = 'ajoberstar'
+  id = 'ajoberstar'
 
-	bintrayRepo = 'gradle-plugins'
-	bintrayLabels = ['gradle']
+  bintrayRepo = 'gradle-plugins'
+  bintrayLabels = ['gradle']
 
-	developers = [
-		[id: 'ajoberstar', name: 'Andrew Oberstar', email: 'andrew@ajoberstar.org']
-	]
+  developers = [
+    [id: 'ajoberstar', name: 'Andrew Oberstar', email: 'andrew@ajoberstar.org']
+  ]
 
-	copyrightYears = '2014-2016'
+  copyrightYears = '2014-2016'
 }
 
 sourceCompatibility = '1.8'
 
 repositories {
-	jcenter()
-	maven {
-		name = 'Plugin Portal'
-		url = 'https://plugins.gradle.org/m2/'
-	}
+  maven {
+    name = 'Plugin Portal'
+    url = 'https://plugins.gradle.org/m2/'
+  }
 }
 
 dependencies {
-	compile gradleApi()
-	compile localGroovy()
-	compile 'org.ajoberstar:grgit:1.8.0-rc.1'
-	compile 'org.ajoberstar:gradle-git:1.6.0'
-	compile 'org.ajoberstar:gradle-git-publish:0.1.0'
-	compile 'com.diffplug.gradle.spotless:spotless:2.4.0'
-	compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
+  compile gradleApi()
+  compile localGroovy()
+  compile 'org.ajoberstar:grgit:1.8.0-rc.1'
+  compile 'org.ajoberstar:gradle-git:1.6.0'
+  compile 'org.ajoberstar:gradle-git-publish:0.1.0'
+  compile 'org.ajoberstar:gradle-stutter:0.1.0'
+  compile 'org.ajoberstar:gradle-bintray:0.1.0'
+  compile 'com.diffplug.gradle.spotless:spotless:2.4.1'
+  compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
+}
+
+spotless {
+  java {
+    googleJavaFormat()
+    licenseHeaderFile rootProject.file('gradle/HEADER')
+  }
+  format 'groovy', {
+    target 'src/**/*.groovy'
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+    licenseHeaderFile rootProject.file('gradle/HEADER'), 'package '
+  }
+  format 'gradle', {
+    target '**/build.gradle'
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
 }
 
 wrapper {
-	gradleVersion = '3.2.1'
+  gradleVersion = '3.2.1'
 }
