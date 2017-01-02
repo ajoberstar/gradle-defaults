@@ -56,7 +56,7 @@ dependencies {
   compile 'org.ajoberstar:gradle-git-publish:0.1.0'
   compile 'org.ajoberstar:gradle-stutter:0.1.0'
   compile 'org.ajoberstar:gradle-bintray:0.1.0'
-  compile 'org.ajoberstar:semver-vcs-grgit:0.1.0'
+  compile 'org.ajoberstar:semver-vcs-gradle-grgit:0.1.0'
   compile 'com.diffplug.gradle.spotless:spotless:2.4.1'
   compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
 }
