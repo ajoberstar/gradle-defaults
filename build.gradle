@@ -1,51 +1,16 @@
-buildscript {
-  dependencies {
-    classpath 'org.ajoberstar:grgit:1.8.0-rc.1'
-  }
-}
 plugins {
+  id 'org.ajoberstar.defaults' version '0.7.0-rc.10'
   id 'groovy'
-  id 'maven-publish'
-  id 'com.jfrog.bintray' version '1.2'
-  id 'org.ajoberstar.defaults' version '0.5.3'
-  id 'org.ajoberstar.grgit' version '1.6.0'
-  id 'org.sonarqube' version '2.2.1'
-  id 'com.diffplug.gradle.spotless' version '2.4.1'
+  id 'java-gradle-plugin'
 }
 
 group = 'org.ajoberstar'
-description = 'Plugin providing opinionated defaults for Gradle projects.'
-
-sonarqube {
-    properties {
-        property 'sonar.projectVersion', version.toString().split('-')[0]
-    }
-}
-
-defaults {
-  id = 'ajoberstar'
-
-  bintrayRepo = 'gradle-plugins'
-  bintrayLabels = ['gradle']
-
-  developers = [
-    [id: 'ajoberstar', name: 'Andrew Oberstar', email: 'andrew@ajoberstar.org']
-  ]
-
-  copyrightYears = '2014-2016'
-}
-
-sourceCompatibility = '1.8'
 
 repositories {
   maven {
     name = 'Plugin Portal'
     url = 'https://plugins.gradle.org/m2/'
   }
-}
-
-configurations.all {
-  exclude group: 'org.codehaus.groovy'
 }
 
 dependencies {
@@ -62,28 +27,30 @@ dependencies {
   compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
 }
 
-// temporary
-licenseMain.enabled=false
-licenseTest.enabled=false
+model {
+  bintray {
+    owner = 'ajoberstar'
+    repo = 'gradle-plugins'
+    pkg = 'org.ajoberstar:gradle-defaults'
+  }
+}
 
-spotless {
-  java {
-    googleJavaFormat()
-    licenseHeaderFile rootProject.file('gradle/HEADER')
-  }
-  format 'groovy', {
-    target 'src/**/*.groovy'
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
-    endWithNewline()
-    licenseHeaderFile rootProject.file('gradle/HEADER'), 'package '
-  }
-  format 'gradle', {
-    target '**/build.gradle'
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
-    endWithNewline()
-  }
+pluginBundle {
+    website = 'https://github.com/ajoberstar/gradle-defaults'
+    vcsUrl = 'https://github.com/ajoberstar/gradle-defaults.git'
+    description = 'Plugin providing opinionated defaults for Gradle projects'
+    plugins {
+        publishPlugin {
+            id = 'org.ajoberstar.defaults'
+            displayName = 'ajoberstar Defaults Plugin'
+            tags = ['defaults']
+        }
+    }
+    mavenCoordinates {
+        groupId = project.group
+        artifactId = project.name
+        version = project.version
+    }
 }
 
 wrapper {
