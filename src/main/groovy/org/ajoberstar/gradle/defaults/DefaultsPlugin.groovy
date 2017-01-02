@@ -35,8 +35,9 @@ class DefaultsPlugin implements Plugin<Project> {
       addSpotless(project)
       addJavaConfig(prj)
       addGroovyConfig(prj)
-      addMavenPublishingConfig(prj)
-      addGradlePluginConfig(prj)
+      addPublishingConfig(prj)
+      addPluginConfig(prj)
+      addReleaseConfig(prj)
       addOrderingRules(prj)
     }
   }
@@ -124,6 +125,33 @@ class DefaultsPlugin implements Plugin<Project> {
     }
   }
 
+  private void addPublishingConfig(Project project) {
+    project.plugins.withId('java') {
+      project.plugins.apply('maven-publish')
+      project.plugins.apply('org.ajoberstar.bintray')
+
+      project.publishing.publications.main(MavenPublication) {
+        from project.components.java
+        artifact project.sourcesJar
+        artifact project.javadocJar
+
+        project.plugins.withId('groovy') {
+          artifact project.groovydocJar
+        }
+      }
+    }
+  }
+
+  private void addPluginConfig(Project project) {
+    project.plugins.withId('java-gradle-plugin') {
+      project.plugins.apply('org.ajoberstar.stutter')
+      project.plugins.apply('com.gradle.plugin-publish')
+
+      // remove duplicate publication
+      project.gradleDevelopment.automatedPublishing = false
+    }
+  }
+
   private void addReleaseConfig(Project project) {
     project.plugins.apply('org.ajoberstar.release-experimental')
     def releaseTask = project.tasks.release
@@ -134,6 +162,9 @@ class DefaultsPlugin implements Plugin<Project> {
         }
         prj.plugins.withId('maven-publish') {
             releaseTask.dependsOn prj.publish
+        }
+        prj.plugins.withId('com.gradle.plugin-publish') {
+            releaseTask.dependsOn prj.publishPlugins
         }
     }
   }
@@ -153,65 +184,6 @@ class DefaultsPlugin implements Plugin<Project> {
           task.shouldRunAfter build
         }
       }
-    }
-  }
-
-  private void addMavenPublishingConfig(Project project) {
-    project.plugins.withId('maven-publish') {
-      project.publishing {
-        publications {
-          main(MavenPublication) {
-            project.plugins.withId('java') {
-              from project.components.java
-              artifact project.sourcesJar
-              artifact project.javadocJar
-            }
-
-            project.plugins.withId('groovy') {
-              artifact project.groovydocJar
-            }
-          }
-        }
-        repositories {
-          mavenLocal()
-          maven {
-            url = "https://api.bintray.com/maven/${System.env['BINTRAY_USER']}/maven/${project.rootProject.name}/;publish=1"
-            credentials {
-              username = System.env['BINTRAY_USER']
-              password = System.env['BINTRAY_KEY']
-            }
-          }
-        }
-      }
-    }
-  }
-
-  private void addGradlePluginConfig(Project project) {
-    project.plugins.withId('java-gradle-plugin') {
-      project.sourceSets {
-          compatTest
-      }
-
-      project.gradlePlugin {
-          testSourceSets sourceSets.compatTest
-      }
-
-      project.task compatTest
-      project.check.dependsOn compatTest
-
-      project.supportedGradleVersions.each { gradleVersion ->
-          def task = project.tasks.create("compatTest${gradleVersion}", Test) {
-              testClassesDir = project.sourceSets.compatTest.output.classesDir
-              classpath = project.sourceSets.compatTest.runtimeClasspath
-              systemProperty 'compat.gradle.version', gradleVersion
-          }
-          project.compatTest.dependsOn task
-      }
-    }
-
-    project.plugins.withId('com.gradle.plugin-publish') {
-      // a special plugin publication will exist. don't try to duplicate it
-      project.publishMainPublicationToBintrayRepository.enabled = false
     }
   }
 }
