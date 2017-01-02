@@ -155,6 +155,11 @@ class DefaultsPlugin implements Plugin<Project> {
 
       // remove duplicate publication
       project.gradleDevelopment.automatedPublishing = false
+
+      // avoid conflict with localGroovy()
+      project.configurations.all {
+        exclude group: 'org.codehaus.groovy'
+      }
     }
   }
 
