@@ -159,6 +159,7 @@ class DefaultsPlugin implements Plugin<Project> {
   }
 
   private void addReleaseConfig(Project project) {
+    project.plugins.apply('org.ajoberstar.semver-vcs-grgit')
     project.plugins.apply('org.ajoberstar.release-experimental')
     def releaseTask = project.tasks.release
     releaseTask.dependsOn 'gitPublishPush'
