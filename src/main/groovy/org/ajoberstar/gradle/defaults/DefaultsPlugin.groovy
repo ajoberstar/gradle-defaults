@@ -132,14 +132,16 @@ class DefaultsPlugin implements Plugin<Project> {
       project.plugins.apply('maven-publish')
       project.plugins.apply('org.ajoberstar.bintray')
 
-      project.publishing.publications {
-        main(MavenPublication) {
-          from project.components.java
-          artifact project.sourcesJar
-          artifact project.javadocJar
+      project.publishing {
+        publications {
+          main(MavenPublication) {
+            from project.components.java
+            artifact project.sourcesJar
+            artifact project.javadocJar
 
-          project.plugins.withId('groovy') {
-            artifact project.groovydocJar
+            project.plugins.withId('groovy') {
+              artifact project.groovydocJar
+            }
           }
         }
       }
