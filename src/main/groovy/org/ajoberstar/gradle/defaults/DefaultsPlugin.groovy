@@ -33,7 +33,7 @@ class DefaultsPlugin implements Plugin<Project> {
     addReleaseConfig(project)
 
     project.allprojects { prj ->
-      addSpotless(project)
+      addSpotless(prj)
       addJavaConfig(prj)
       addGroovyConfig(prj)
       addPublishingConfig(prj)
@@ -105,16 +105,20 @@ class DefaultsPlugin implements Plugin<Project> {
   private void addSpotless(Project project) {
     project.plugins.apply('com.diffplug.gradle.spotless')
     project.spotless {
-      java {
-        googleJavaFormat()
-        licenseHeaderFile project.rootProject.file('gradle/HEADER')
+      project.plugins.withId('java') {
+        java {
+          googleJavaFormat()
+          licenseHeaderFile project.rootProject.file('gradle/HEADER')
+        }
       }
-      format 'groovy', {
-        target 'src/**/*.groovy'
-        trimTrailingWhitespace()
-        indentWithSpaces(2)
-        endWithNewline()
-        licenseHeaderFile project.rootProject.file('gradle/HEADER'), 'package '
+      project.plugins.withId('groovy') {
+        format 'groovy', {
+          target 'src/**/*.groovy'
+          trimTrailingWhitespace()
+          indentWithSpaces(2)
+          endWithNewline()
+          licenseHeaderFile project.rootProject.file('gradle/HEADER'), 'package '
+        }
       }
       format 'gradle', {
         target '**/build.gradle'
@@ -199,11 +203,9 @@ class DefaultsPlugin implements Plugin<Project> {
       }
 
       def build = project.tasks['build']
-      def sonarqube = project.tasks['sonarqube']
       project.tasks.all { task ->
         if (task.group == 'publishing') {
           task.shouldRunAfter build
-          task.shouldRunAfter sonarqube
         }
       }
     }

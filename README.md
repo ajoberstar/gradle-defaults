@@ -55,7 +55,7 @@ In all projects:
   - Groovy code and Gradle files formatted for 2 space indents, trailing space removed, and newlines at the end of files.
 - ordering rules:
   - `clean` runs before everything else
-  - all `publishing` tasks run after `build` and `sonarqube`
+  - all `publishing` tasks run after `build`
 
 ### java
 
