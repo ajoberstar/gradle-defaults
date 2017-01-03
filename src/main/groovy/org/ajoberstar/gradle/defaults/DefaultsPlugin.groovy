@@ -33,7 +33,7 @@ class DefaultsPlugin implements Plugin<Project> {
     addReleaseConfig(project)
 
     project.allprojects { prj ->
-      addSpotless(project)
+      addSpotless(prj)
       addJavaConfig(prj)
       addGroovyConfig(prj)
       addPublishingConfig(prj)
