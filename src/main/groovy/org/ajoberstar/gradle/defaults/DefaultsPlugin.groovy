@@ -203,11 +203,9 @@ class DefaultsPlugin implements Plugin<Project> {
       }
 
       def build = project.tasks['build']
-      def sonarqube = project.tasks['sonarqube']
       project.tasks.all { task ->
         if (task.group == 'publishing') {
           task.shouldRunAfter build
-          task.shouldRunAfter sonarqube
         }
       }
     }
