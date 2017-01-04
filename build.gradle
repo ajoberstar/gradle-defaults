@@ -1,5 +1,5 @@
 plugins {
-  id 'org.ajoberstar.defaults' version '0.7.1-rc.3'
+  id 'org.ajoberstar.defaults' version '0.7.2'
   id 'groovy'
   id 'java-gradle-plugin'
 }
@@ -30,8 +30,8 @@ dependencies {
 model {
   bintray {
     owner = 'ajoberstar'
-    repo = 'gradle-plugins'
-    pkg = 'org.ajoberstar:gradle-defaults'
+    repo = 'maven'
+    pkg = 'gradle-defaults'
   }
 }
 
