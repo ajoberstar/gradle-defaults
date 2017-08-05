@@ -1,5 +1,5 @@
 plugins {
-  id 'org.ajoberstar.defaults' version '0.7.2'
+  id 'org.ajoberstar.defaults' version '0.7.3'
   id 'groovy'
   id 'java-gradle-plugin'
 }
@@ -16,15 +16,14 @@ repositories {
 dependencies {
   compile gradleApi()
   compile localGroovy()
-  compile 'org.ajoberstar:grgit:1.9.1'
-  compile 'org.ajoberstar:gradle-git:1.7.1'
-  compile 'org.ajoberstar:gradle-git-publish:0.2.1'
-  compile 'org.ajoberstar:gradle-stutter:0.1.0'
-  compile 'org.ajoberstar:gradle-bintray:0.1.0'
-  compile 'org.ajoberstar:semver-vcs-gradle-grgit:0.1.0'
+  compile 'org.ajoberstar:grgit:2.0.0-rc.1'
+  compile 'org.ajoberstar.reckon:reckon-gradle:0.2.0-milestone.3'
+  compile 'org.ajoberstar:gradle-git-publish:0.3.0-rc.1'
+  compile 'org.ajoberstar:gradle-stutter:0.1.1-rc.1'
+  compile 'org.ajoberstar:gradle-bintray:0.1.1-rc.1'
   compile 'com.gradle.publish:plugin-publish-plugin:0.9.7'
-  compile 'com.diffplug.gradle.spotless:spotless:2.4.1'
-  compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.2.1'
+  compile 'com.diffplug.spotless:spotless-plugin-gradle:3.4.1'
+  compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.5'
 }
 
 model {
