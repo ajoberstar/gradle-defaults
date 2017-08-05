@@ -76,8 +76,12 @@ class DefaultsPlugin implements Plugin<Project> {
   }
 
   private void addReleaseConfig(Project project) {
-    project.plugins.apply('org.ajoberstar.semver-vcs-grgit')
-    project.plugins.apply('org.ajoberstar.release-experimental')
+    project.plugins.apply('org.ajoberstar.reckon')
+
+    project.reckon {
+      normal = scopeFromProp()
+      preRelease = stageFromProp('milestone', 'rc', 'final')
+    }
 
     def tagTask = project.tasks.create('tagVersion') {
       doLast {
@@ -86,7 +90,7 @@ class DefaultsPlugin implements Plugin<Project> {
       }
     }
 
-    def releaseTask = project.tasks.release
+    def releaseTask = project.tasks.create('release')
     releaseTask.dependsOn tagTask
     releaseTask.dependsOn 'gitPublishPush'
     project.allprojects { prj ->
