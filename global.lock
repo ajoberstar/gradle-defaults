@@ -1,0 +1,390 @@
+{
+    "compile": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "compileClasspath": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "default": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "jacocoAgent": {
+        "org.jacoco:org.jacoco.agent": {
+            "locked": "0.7.8"
+        }
+    },
+    "jacocoAnt": {
+        "org.jacoco:org.jacoco.ant": {
+            "locked": "0.7.8"
+        }
+    },
+    "runtime": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "runtimeClasspath": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "testCompile": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "testCompileClasspath": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "testRuntime": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    },
+    "testRuntimeClasspath": {
+        "com.diffplug.spotless:spotless-plugin-gradle": {
+            "locked": "3.4.1",
+            "requested": "+"
+        },
+        "com.gradle.publish:plugin-publish-plugin": {
+            "locked": "0.9.7",
+            "requested": "0.9.7"
+        },
+        "com.netflix.nebula:gradle-dependency-lock-plugin": {
+            "locked": "4.9.4",
+            "requested": "+"
+        },
+        "com.netflix.nebula:gradle-lint-plugin": {
+            "locked": "7.9.5",
+            "requested": "+"
+        },
+        "org.ajoberstar.reckon:reckon-gradle": {
+            "locked": "0.2.1",
+            "requested": "0.2.1"
+        },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1-rc.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-stutter": {
+            "locked": "0.2.0",
+            "requested": "+"
+        },
+        "org.ajoberstar:grgit": {
+            "locked": "2.0.0",
+            "requested": "+"
+        },
+        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
+            "locked": "2.5",
+            "requested": "+"
+        }
+    }
+}
