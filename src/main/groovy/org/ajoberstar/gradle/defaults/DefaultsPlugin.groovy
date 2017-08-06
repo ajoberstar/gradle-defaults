@@ -38,10 +38,10 @@ class DefaultsPlugin implements Plugin<Project> {
       addGroovyConfig(prj)
       addPublishingConfig(prj)
       addPluginConfig(prj)
+      addNebulaConfig(prj)
       addOrderingRules(prj)
     }
   }
-
 
   private void addGit(Project project) {
     project.plugins.apply('org.ajoberstar.grgit')
@@ -60,9 +60,6 @@ class DefaultsPlugin implements Plugin<Project> {
 
     project.gitPublish {
       branch = 'gh-pages'
-      contents {
-        from 'src/gh-pages'
-      }
     }
   }
 
@@ -83,15 +80,8 @@ class DefaultsPlugin implements Plugin<Project> {
       preRelease = stageFromProp('milestone', 'rc', 'final')
     }
 
-    def tagTask = project.tasks.create('tagVersion') {
-      doLast {
-        def version = project.version.toString()
-        project.grgit.tag.add(name: version, message: "v${version}")
-      }
-    }
-
     def releaseTask = project.tasks.create('release')
-    releaseTask.dependsOn tagTask
+    releaseTask.dependsOn 'reckonTagPush'
     releaseTask.dependsOn 'gitPublishPush'
     project.allprojects { prj ->
         prj.plugins.withId('org.gradle.base') {
@@ -213,5 +203,12 @@ class DefaultsPlugin implements Plugin<Project> {
         }
       }
     }
+  }
+
+  private void addNebulaConfig(Project project) {
+    project.plugins.apply('nebula.lint')
+    gradleLint.rules = ['archaic-wrapper', 'all-dependency', 'dependency-parentheses', 'dependency-tuple']
+
+    project.plugins.apply('nebula.dependency-lock')
   }
 }
