@@ -207,8 +207,7 @@ class DefaultsPlugin implements Plugin<Project> {
 
   private void addNebulaConfig(Project project) {
     project.plugins.apply('nebula.lint')
-    gradleLint.rules = ['archaic-wrapper', 'all-dependency', 'dependency-parentheses', 'dependency-tuple']
-
+    project.gradleLint.rules = ['archaic-wrapper', 'all-dependency', 'dependency-parentheses', 'dependency-tuple']
     project.plugins.apply('nebula.dependency-lock')
   }
 }
