@@ -19,7 +19,7 @@ dependencies {
 
   // my plugins
   compile 'org.ajoberstar:grgit:2.0.0'
-  compile 'org.ajoberstar.reckon:reckon-gradle:0.2.0'
+  compile 'org.ajoberstar.reckon:reckon-gradle:0.2.1'
   compile 'org.ajoberstar:gradle-git-publish:0.3.0'
   compile 'org.ajoberstar:gradle-stutter:0.1.1-rc.1'
   compile 'org.ajoberstar:gradle-bintray:0.1.1-rc.1'
