@@ -2,6 +2,7 @@ plugins {
   id 'org.ajoberstar.defaults' version '0.8.0'
   id 'groovy'
   id 'java-gradle-plugin'
+  id 'idea'
 }
 
 group = 'org.ajoberstar'
@@ -13,6 +14,16 @@ repositories {
   }
   jcenter()
 }
+
+idea {
+  module {
+    downloadJavadoc = false
+    downloadSources = false
+  }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
   // gradle
@@ -43,23 +54,23 @@ model {
 }
 
 pluginBundle {
-    website = 'https://github.com/ajoberstar/gradle-defaults'
-    vcsUrl = 'https://github.com/ajoberstar/gradle-defaults.git'
-    description = 'Plugin providing opinionated defaults for Gradle projects'
-    plugins {
-        publishPlugin {
-            id = 'org.ajoberstar.defaults'
-            displayName = 'ajoberstar Defaults Plugin'
-            tags = ['defaults']
-        }
+  website = 'https://github.com/ajoberstar/gradle-defaults'
+  vcsUrl = 'https://github.com/ajoberstar/gradle-defaults.git'
+  description = 'Plugin providing opinionated defaults for Gradle projects'
+  plugins {
+    publishPlugin {
+      id = 'org.ajoberstar.defaults'
+      displayName = 'ajoberstar Defaults Plugin'
+      tags = ['defaults']
     }
-    mavenCoordinates {
-        groupId = project.group
-        artifactId = project.name
-        version = project.version
-    }
+  }
+  mavenCoordinates {
+    groupId = project.group
+    artifactId = project.name
+    version = project.version
+  }
 }
 
 wrapper {
-  gradleVersion = '4.0.2'
+  gradleVersion = '4.1'
 }
