@@ -1,5 +1,5 @@
 plugins {
-  id 'org.ajoberstar.defaults' version '0.8.0'
+  id 'org.ajoberstar.defaults' version '0.8.1'
   id 'groovy'
   id 'java-gradle-plugin'
 }
@@ -21,13 +21,13 @@ dependencies {
 
   // my plugins
   compile 'org.ajoberstar:grgit:+'
-  compile 'org.ajoberstar.reckon:reckon-gradle:0.2.1'
+  compile 'org.ajoberstar.reckon:reckon-gradle:+'
   compile 'org.ajoberstar:gradle-git-publish:+'
   compile 'org.ajoberstar:gradle-stutter:+'
   compile 'org.ajoberstar:gradle-bintray:+'
 
   // 3rd party plugins
-  compile 'com.gradle.publish:plugin-publish-plugin:0.9.7'
+  compile 'com.gradle.publish:plugin-publish-plugin:0.9.9'
   compile 'com.diffplug.spotless:spotless-plugin-gradle:+'
   compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:+'
   compile 'com.netflix.nebula:gradle-dependency-lock-plugin:+'
