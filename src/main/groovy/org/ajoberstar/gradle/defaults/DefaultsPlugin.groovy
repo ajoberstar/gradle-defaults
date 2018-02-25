@@ -154,6 +154,7 @@ class DefaultsPlugin implements Plugin<Project> {
   private void addPublishingConfig(Project project) {
     project.plugins.withId('java') {
       project.plugins.apply('maven-publish')
+      project.plugins.apply('nebula.maven-resolved-dependencies')
       project.plugins.apply('org.ajoberstar.bintray')
 
       project.publishing {

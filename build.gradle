@@ -20,18 +20,19 @@ dependencies {
   compile localGroovy()
 
   // my plugins
-  compile 'org.ajoberstar:grgit:+'
-  compile 'org.ajoberstar.reckon:reckon-gradle:+'
-  compile 'org.ajoberstar:gradle-git-publish:+'
-  compile 'org.ajoberstar:gradle-stutter:+'
-  compile 'org.ajoberstar:gradle-bintray:+'
+  runtime 'org.ajoberstar:grgit:+'
+  runtime 'org.ajoberstar.reckon:reckon-gradle:+'
+  runtime 'org.ajoberstar:gradle-git-publish:+'
+  runtime 'org.ajoberstar:gradle-stutter:+'
+  runtime 'org.ajoberstar:gradle-bintray:+'
 
   // 3rd party plugins
-  compile 'com.gradle.publish:plugin-publish-plugin:0.9.9'
-  compile 'com.diffplug.spotless:spotless-plugin-gradle:+'
-  compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:+'
-  compile 'com.netflix.nebula:gradle-dependency-lock-plugin:+'
-  compile 'com.netflix.nebula:gradle-lint-plugin:+'
+  runtime 'com.gradle.publish:plugin-publish-plugin:0.9.9'
+  runtime 'com.diffplug.spotless:spotless-plugin-gradle:+'
+  runtime 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:+'
+  runtime 'com.netflix.nebula:gradle-dependency-lock-plugin:+'
+  runtime 'com.netflix.nebula:gradle-lint-plugin:+'
+  runtime 'com.netflix.nebula:nebula-publishing-plugin:+'
 }
 
 model {
