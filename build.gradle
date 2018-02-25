@@ -29,7 +29,6 @@ dependencies {
   // 3rd party plugins
   runtime 'com.gradle.publish:plugin-publish-plugin:0.9.9'
   runtime 'com.diffplug.spotless:spotless-plugin-gradle:+'
-  runtime 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:+'
   runtime 'com.netflix.nebula:gradle-dependency-lock-plugin:+'
   runtime 'com.netflix.nebula:gradle-lint-plugin:+'
   runtime 'com.netflix.nebula:nebula-publishing-plugin:+'

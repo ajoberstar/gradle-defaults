@@ -29,7 +29,6 @@ class DefaultsPlugin implements Plugin<Project> {
       throw new GradleException('org.ajoberstar.defaults must only be applied to the root project')
     }
     addGit(project)
-    addSonar(project)
     addReleaseConfig(project)
 
     project.allprojects { prj ->
@@ -60,15 +59,6 @@ class DefaultsPlugin implements Plugin<Project> {
 
     project.gitPublish {
       branch = 'gh-pages'
-    }
-  }
-
-  private void addSonar(Project project) {
-    project.plugins.apply('org.sonarqube')
-    project.sonarqube {
-      properties {
-          property 'sonar.projectVersion', project.version.toString().split('-')[0]
-      }
     }
   }
 

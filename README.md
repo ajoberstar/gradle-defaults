@@ -4,9 +4,8 @@
 
 Plugin providing opinionated defaults for Gradle builds.
 
-[![Bintray](https://api.bintray.com/packages/ajoberstar/maven/gradle-defaults/images/download.svg)](https://bintray.com/ajoberstar/maven/gradle-defaults/_latestVersion)
+[![Download](https://api.bintray.com/packages/ajoberstar/maven/gradle-defaults/images/download.svg)](https://bintray.com/ajoberstar/maven/gradle-defaults/_latestVersion)
 [![Travis](https://img.shields.io/travis/ajoberstar/gradle-defaults.svg?style=flat-square)](https://travis-ci.org/ajoberstar/gradle-defaults)
-[![Quality Gate](https://sonarqube.ajoberstar.com/api/badges/gate?key=org.ajoberstar:gradle-defaults)](https://sonarqube.ajoberstar.com/dashboard/index/org.ajoberstar:gradle-defaults)
 [![GitHub license](https://img.shields.io/github/license/ajoberstar/gradle-defaults.svg?style=flat-square)](https://github.com/ajoberstar/gradle-defaults/blob/master/LICENSE)
 
 ## What does it do?
@@ -41,8 +40,6 @@ In the root project:
     - `src/gh-pages` to `/`
     - `javadoc` task to `/docs/<taskpath>` from all projects
     - `groovydoc` task to `/docs/<taskpath>` from all projects
-- `org.sonarqube` applied
-  - `sonar.projectVersion` set to the targeted final version (i.e. strips off `-<whatever>` from the version)
 - `org.ajoberstar.semver-vcs-grgit` applied
 - `org.ajoberstar.release-experimental` applied
   - `release` depends on `clean`, `build`, `gitPublishPush`, `publish`, and `publishPlugins` (when available) from all projects

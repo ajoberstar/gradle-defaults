@@ -21,27 +21,23 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.3.0",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1-rc.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-git-publish": {
             "locked": "0.3.2",
             "requested": "+"
         },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.3",
+            "requested": "+"
+        },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.0",
+            "locked": "0.2.1",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.0",
-            "requested": "+"
-        },
-        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
-            "locked": "2.6.2",
+            "locked": "2.1.1",
             "requested": "+"
         }
     },
@@ -77,27 +73,23 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.3.0",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1-rc.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-git-publish": {
             "locked": "0.3.2",
             "requested": "+"
         },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.3",
+            "requested": "+"
+        },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.0",
+            "locked": "0.2.1",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.0",
-            "requested": "+"
-        },
-        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
-            "locked": "2.6.2",
+            "locked": "2.1.1",
             "requested": "+"
         }
     },
@@ -123,27 +115,23 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.3.0",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1-rc.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-git-publish": {
             "locked": "0.3.2",
             "requested": "+"
         },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.3",
+            "requested": "+"
+        },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.0",
+            "locked": "0.2.1",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.0",
-            "requested": "+"
-        },
-        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
-            "locked": "2.6.2",
+            "locked": "2.1.1",
             "requested": "+"
         }
     },
@@ -169,27 +157,23 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.3.0",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1-rc.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-git-publish": {
             "locked": "0.3.2",
             "requested": "+"
         },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.3",
+            "requested": "+"
+        },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.0",
+            "locked": "0.2.1",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.0",
-            "requested": "+"
-        },
-        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
-            "locked": "2.6.2",
+            "locked": "2.1.1",
             "requested": "+"
         }
     },
@@ -215,27 +199,23 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.3.0",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1-rc.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-git-publish": {
             "locked": "0.3.2",
             "requested": "+"
         },
+        "org.ajoberstar:gradle-bintray": {
+            "locked": "0.1.1",
+            "requested": "+"
+        },
+        "org.ajoberstar:gradle-git-publish": {
+            "locked": "0.3.3",
+            "requested": "+"
+        },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.0",
+            "locked": "0.2.1",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.0",
-            "requested": "+"
-        },
-        "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin": {
-            "locked": "2.6.2",
+            "locked": "2.1.1",
             "requested": "+"
         }
     }
