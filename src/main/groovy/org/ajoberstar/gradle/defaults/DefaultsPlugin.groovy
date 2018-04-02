@@ -37,8 +37,6 @@ class DefaultsPlugin implements Plugin<Project> {
       addGroovyConfig(prj)
       addPublishingConfig(prj)
       addPluginConfig(prj)
-      addNebulaConfig(prj)
-      addOrderingRules(prj)
     }
   }
 
@@ -68,21 +66,6 @@ class DefaultsPlugin implements Plugin<Project> {
     project.reckon {
       normal = scopeFromProp()
       preRelease = stageFromProp('milestone', 'rc', 'final')
-    }
-
-    def releaseTask = project.tasks.create('release')
-    releaseTask.dependsOn 'reckonTagPush'
-    releaseTask.dependsOn 'gitPublishPush'
-    project.allprojects { prj ->
-        prj.plugins.withId('org.gradle.base') {
-            releaseTask.dependsOn prj.clean, prj.build
-        }
-        prj.plugins.withId('maven-publish') {
-            releaseTask.dependsOn prj.publish
-        }
-        prj.plugins.withId('com.gradle.plugin-publish') {
-            releaseTask.dependsOn prj.publishPlugins
-        }
     }
   }
 
@@ -176,29 +159,5 @@ class DefaultsPlugin implements Plugin<Project> {
         exclude group: 'org.codehaus.groovy'
       }
     }
-  }
-
-  private void addOrderingRules(Project project) {
-    project.plugins.withId('org.gradle.base') {
-      def clean = project.tasks['clean']
-      project.tasks.all { task ->
-        if (task != clean) {
-          task.shouldRunAfter clean
-        }
-      }
-
-      def build = project.tasks['build']
-      project.tasks.all { task ->
-        if (task.group == 'publishing') {
-          task.shouldRunAfter build
-        }
-      }
-    }
-  }
-
-  private void addNebulaConfig(Project project) {
-    project.plugins.apply('nebula.lint')
-    project.gradleLint.rules = ['archaic-wrapper', 'all-dependency', 'dependency-parentheses', 'dependency-tuple']
-    project.plugins.apply('nebula.dependency-lock')
   }
 }

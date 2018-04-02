@@ -27,10 +27,8 @@ dependencies {
   runtime 'org.ajoberstar:gradle-bintray:+'
 
   // 3rd party plugins
-  runtime 'com.gradle.publish:plugin-publish-plugin:0.9.9'
+  runtime 'com.gradle.publish:plugin-publish-plugin:+'
   runtime 'com.diffplug.spotless:spotless-plugin-gradle:+'
-  runtime 'com.netflix.nebula:gradle-dependency-lock-plugin:+'
-  runtime 'com.netflix.nebula:gradle-lint-plugin:+'
   runtime 'com.netflix.nebula:nebula-publishing-plugin:+'
 }
 
@@ -58,8 +56,4 @@ pluginBundle {
         artifactId = project.name
         version = project.version
     }
-}
-
-wrapper {
-  gradleVersion = '4.0.2'
 }
