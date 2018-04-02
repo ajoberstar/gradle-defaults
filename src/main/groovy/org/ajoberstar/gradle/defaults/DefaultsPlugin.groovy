@@ -30,6 +30,7 @@ class DefaultsPlugin implements Plugin<Project> {
     }
     addGit(project)
     addReleaseConfig(project)
+    addLockPush(project)
 
     project.allprojects { prj ->
       addSpotless(prj)
@@ -37,6 +38,7 @@ class DefaultsPlugin implements Plugin<Project> {
       addGroovyConfig(prj)
       addPublishingConfig(prj)
       addPluginConfig(prj)
+      addLocking(prj)
     }
   }
 
@@ -157,6 +159,24 @@ class DefaultsPlugin implements Plugin<Project> {
       // avoid conflict with localGroovy()
       project.configurations.all {
         exclude group: 'org.codehaus.groovy'
+      }
+    }
+  }
+
+  private void addLocking(Project project) {
+    project.dependencyLocking {
+      lockAllConfigurations()
+    }
+  }
+
+  private void addLockPush(Project project) {
+    Task lockPush = project.tasks.create('dependencyLockPush')
+    lockPush.inputs.dir 'gradle/dependency-locks'
+    lockPush.doFirst {
+      project.grgit.add(patterns: ['gradle/dependency-locks'])
+      if (!project.grgit.status().clean) {
+        project.grgit.commit(message: 'Update dependency lockfile')
+        project.grgit.push(refsOrSpecs: ['HEAD:refs/heads/update-dependencies'], force: true)
       }
     }
   }
