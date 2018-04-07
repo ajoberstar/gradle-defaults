@@ -65,7 +65,7 @@ class DefaultsPlugin implements Plugin<Project> {
 
     project.reckon {
       normal = scopeFromProp()
-      preRelease = stageFromProp('milestone', 'rc', 'final')
+      preRelease = stageFromProp('alpha', 'beta', 'rc', 'final')
     }
   }
 
