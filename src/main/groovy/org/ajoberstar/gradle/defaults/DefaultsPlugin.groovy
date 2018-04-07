@@ -74,8 +74,7 @@ class DefaultsPlugin implements Plugin<Project> {
     project.spotless {
       project.plugins.withId('java') {
         java {
-          googleJavaFormat()
-          licenseHeaderFile project.rootProject.file('gradle/HEADER')
+          eclipse().configFile('gradle/eclipse-java-formatter.xml')
         }
       }
       project.plugins.withId('groovy') {
@@ -84,7 +83,6 @@ class DefaultsPlugin implements Plugin<Project> {
           trimTrailingWhitespace()
           indentWithSpaces(2)
           endWithNewline()
-          licenseHeaderFile project.rootProject.file('gradle/HEADER'), 'package '
         }
       }
       format 'gradle', {
@@ -98,8 +96,6 @@ class DefaultsPlugin implements Plugin<Project> {
 
   private void addJavaConfig(Project project) {
     project.plugins.withId('java') {
-      project.plugins.apply('jacoco')
-
       Task sourcesJar = project.tasks.create('sourcesJar', Jar)
       sourcesJar.with {
         classifier = 'sources'
