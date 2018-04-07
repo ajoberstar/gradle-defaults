@@ -74,7 +74,7 @@ class DefaultsPlugin implements Plugin<Project> {
     project.spotless {
       project.plugins.withId('java') {
         java {
-          eclipse().configFile('gradle/eclipse-java-formatter.xml')
+          eclipse().configFile(project.rootProject.file('gradle/eclipse-java-formatter.xml'))
         }
       }
       project.plugins.withId('groovy') {
