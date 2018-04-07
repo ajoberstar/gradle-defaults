@@ -13,7 +13,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.4.0",
+            "locked": "0.5.0-beta.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-bintray": {
@@ -25,7 +25,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.1",
+            "locked": "0.3.0-rc.2",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -57,7 +57,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.4.0",
+            "locked": "0.5.0-beta.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-bintray": {
@@ -69,7 +69,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.1",
+            "locked": "0.3.0-rc.2",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -91,7 +91,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.4.0",
+            "locked": "0.5.0-beta.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-bintray": {
@@ -103,7 +103,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.1",
+            "locked": "0.3.0-rc.2",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -125,7 +125,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.4.0",
+            "locked": "0.5.0-beta.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-bintray": {
@@ -137,7 +137,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.1",
+            "locked": "0.3.0-rc.2",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -159,7 +159,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.4.0",
+            "locked": "0.5.0-beta.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-bintray": {
@@ -171,7 +171,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.2.1",
+            "locked": "0.3.0-rc.2",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
