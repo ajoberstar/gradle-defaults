@@ -90,8 +90,11 @@ class DefaultsPlugin implements Plugin<Project> {
 
     rootProject.allprojects { prj ->
       prj.tasks.withType(Test) { task ->
+        println "Configuring all results for: ${task.path}"
         resultsTask.from(task.reports.junitXml.destination) {
-          into(task.path.replaceAll('^:', '').replace(':', '/'))
+          def path = task.path.replaceAll('^:', '').replace(':', '/')
+          println "Copying into: ${path}"
+          into(path)
         }
         task.finalizedBy resultsTask
       }
