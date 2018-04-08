@@ -24,7 +24,6 @@ dependencies {
   runtime 'org.ajoberstar.reckon:reckon-gradle:+'
   runtime 'org.ajoberstar:gradle-git-publish:+'
   runtime 'org.ajoberstar:gradle-stutter:+'
-  runtime 'org.ajoberstar:gradle-bintray:+'
 
   // 3rd party plugins
   runtime 'com.gradle.publish:plugin-publish-plugin:+'

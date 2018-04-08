@@ -16,10 +16,6 @@
             "locked": "0.5.0-beta.1",
             "requested": "+"
         },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1",
-            "requested": "+"
-        },
         "org.ajoberstar:gradle-git-publish": {
             "locked": "0.4.0-rc.2",
             "requested": "+"
@@ -60,10 +56,6 @@
             "locked": "0.5.0-beta.1",
             "requested": "+"
         },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1",
-            "requested": "+"
-        },
         "org.ajoberstar:gradle-git-publish": {
             "locked": "0.4.0-rc.2",
             "requested": "+"
@@ -92,10 +84,6 @@
         },
         "org.ajoberstar.reckon:reckon-gradle": {
             "locked": "0.5.0-beta.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -128,10 +116,6 @@
             "locked": "0.5.0-beta.1",
             "requested": "+"
         },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1",
-            "requested": "+"
-        },
         "org.ajoberstar:gradle-git-publish": {
             "locked": "0.4.0-rc.2",
             "requested": "+"
@@ -160,10 +144,6 @@
         },
         "org.ajoberstar.reckon:reckon-gradle": {
             "locked": "0.5.0-beta.1",
-            "requested": "+"
-        },
-        "org.ajoberstar:gradle-bintray": {
-            "locked": "0.1.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
