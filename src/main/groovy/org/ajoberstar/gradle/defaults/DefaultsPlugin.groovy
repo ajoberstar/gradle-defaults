@@ -87,12 +87,12 @@ class DefaultsPlugin implements Plugin<Project> {
     resultsTask.group = 'verification'
     resultsTask.description = 'Consolidate all Test task results in one directory.'
     resultsTask.into rootProject.layout.buildDirectory.dir('all-test-results')
+    resultsTask.includeEmptyDirs = false
+    resultsTask.include '**/*.xml'
 
     rootProject.allprojects { prj ->
       prj.tasks.withType(Test) { task ->
         resultsTask.from({ task.reports.junitXml.destination }) {
-          include '**/*.xml'
-
           def parts = task.path.split(':')[1..-1]
           if (parts.size() == 1) {
             parts = [prj.name] + parts
