@@ -1,7 +1,9 @@
 plugins {
-  id 'org.ajoberstar.defaults' version '0.8.3'
+  id 'org.ajoberstar.defaults' version '0.10.0-milestone.12'
   id 'groovy'
   id 'java-gradle-plugin'
+  // TODO remove when Gradle dependency locking is available
+  id 'nebula.dependency-lock' version '5.0.4'
 }
 
 group = 'org.ajoberstar'
@@ -31,11 +33,16 @@ dependencies {
   runtime 'com.netflix.nebula:nebula-publishing-plugin:+'
 }
 
-model {
-  bintray {
-    owner = 'ajoberstar'
-    repo = 'maven'
-    pkg = 'gradle-defaults'
+publishing {
+  repositories {
+    maven {
+      name = 'bintray'
+      url = 'https://api.bintray.com/maven/ajoberstar/maven/gradle-defaults/;publish=1'
+      credentials {
+        username = System.env['BINTRAY_USER']
+        password = System.env['BINTRAY_KEY']
+      }
+    }
   }
 }
 

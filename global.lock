@@ -13,7 +13,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0-beta.1",
+            "locked": "0.5.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -27,16 +27,6 @@
         "org.ajoberstar:grgit": {
             "locked": "2.1.1",
             "requested": "+"
-        }
-    },
-    "jacocoAgent": {
-        "org.jacoco:org.jacoco.agent": {
-            "locked": "0.8.0"
-        }
-    },
-    "jacocoAnt": {
-        "org.jacoco:org.jacoco.ant": {
-            "locked": "0.8.0"
         }
     },
     "runtime": {
@@ -53,7 +43,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0-beta.1",
+            "locked": "0.5.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -83,7 +73,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0-beta.1",
+            "locked": "0.5.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -113,7 +103,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0-beta.1",
+            "locked": "0.5.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -143,7 +133,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0-beta.1",
+            "locked": "0.5.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
