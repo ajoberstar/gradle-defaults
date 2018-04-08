@@ -21,6 +21,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
+import org.gradle.api.tasks.Sync
 
 class DefaultsPlugin implements Plugin<Project> {
 
@@ -30,6 +31,7 @@ class DefaultsPlugin implements Plugin<Project> {
     }
     addGit(project)
     addReleaseConfig(project)
+    addCentralTestResults(project)
 
     project.allprojects { prj ->
       addSpotless(prj)
@@ -60,12 +62,38 @@ class DefaultsPlugin implements Plugin<Project> {
     }
   }
 
-  private void addReleaseConfig(Project project) {
-    project.plugins.apply('org.ajoberstar.reckon')
+  private void addReleaseConfig(Project rootProject) {
+    rootProject.plugins.apply('org.ajoberstar.reckon')
 
-    project.reckon {
+    rootProject.reckon {
       normal = scopeFromProp()
       preRelease = stageFromProp('alpha', 'beta', 'rc', 'final')
+    }
+
+    // push tags before tag is pushed
+    rootProject.tasks.reckonTagPush.dependsOn 'gitPublishPush'
+
+    rootProject.allprojects { prj ->
+      prj.tasks.matching { it.name == 'check' }.all { task ->
+        // make sure tests pass before creating tag
+        rootProject.tasks.reckonTagCreate.dependsOn task
+      }
+    }
+  }
+
+  private void addCentralTestResults(Project rootProject) {
+    Task resultsTask = rootProject.tasks.create('allTestResults', Sync)
+    resultsTask.group = 'verification'
+    resultsTask.description = 'Consolidate all Test task results in one directory.'
+    resultsTask.into rootProject.layout.buildDirectory.dir('all-test-results')
+
+    rootProject.allprojects { prj ->
+      prj.tasks.withType(Test) { task ->
+        resultsTask.from(task.reports.xml.destination) {
+          into(task.path.replaceAll('^:', '').replace(':', '/'))
+        }
+        task.finalizedBy resultsTask
+      }
     }
   }
 

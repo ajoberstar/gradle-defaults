@@ -39,6 +39,12 @@ model {
   }
 }
 
+stutter {
+  java(8) {
+    compatibleRange '4.6'
+  }
+}
+
 pluginBundle {
   website = 'https://github.com/ajoberstar/gradle-defaults'
   vcsUrl = 'https://github.com/ajoberstar/gradle-defaults.git'
