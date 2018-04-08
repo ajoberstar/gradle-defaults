@@ -32,7 +32,6 @@ class DefaultsPlugin implements Plugin<Project> {
     }
     addGit(project)
     addReleaseConfig(project)
-    addCentralTestResults(project)
 
     project.allprojects { prj ->
       addSpotless(prj)
@@ -78,28 +77,6 @@ class DefaultsPlugin implements Plugin<Project> {
       prj.tasks.matching { it.name == 'check' }.all { task ->
         // make sure tests pass before creating tag
         rootProject.tasks.reckonTagCreate.dependsOn task
-      }
-    }
-  }
-
-  private void addCentralTestResults(Project rootProject) {
-    Task resultsTask = rootProject.tasks.create('allTestResults', Sync)
-    resultsTask.group = 'verification'
-    resultsTask.description = 'Consolidate all Test task results in one directory.'
-    resultsTask.into rootProject.layout.buildDirectory.dir('all-test-results')
-    resultsTask.includeEmptyDirs = false
-    resultsTask.include '**/*.xml'
-
-    rootProject.allprojects { prj ->
-      prj.tasks.withType(Test) { task ->
-        resultsTask.from({ task.reports.junitXml.destination }) {
-          def parts = task.path.split(':')[1..-1]
-          if (parts.size() == 1) {
-            parts = [prj.name] + parts
-          }
-          into(parts.join('_'))
-        }
-        task.finalizedBy resultsTask
       }
     }
   }
