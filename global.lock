@@ -21,7 +21,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.3.0-rc.2",
+            "locked": "0.3.0",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -61,7 +61,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.3.0-rc.2",
+            "locked": "0.3.0",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -91,7 +91,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.3.0-rc.2",
+            "locked": "0.3.0",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -121,7 +121,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.3.0-rc.2",
+            "locked": "0.3.0",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
@@ -151,7 +151,7 @@
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
-            "locked": "0.3.0-rc.2",
+            "locked": "0.3.0",
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
