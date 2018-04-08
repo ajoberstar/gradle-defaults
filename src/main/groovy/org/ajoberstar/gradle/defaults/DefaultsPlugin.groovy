@@ -90,7 +90,7 @@ class DefaultsPlugin implements Plugin<Project> {
 
     rootProject.allprojects { prj ->
       prj.tasks.withType(Test) { task ->
-        resultsTask.from(task.reports.xml.destination) {
+        resultsTask.from(task.reports.junitXml.destination) {
           into(task.path.replaceAll('^:', '').replace(':', '/'))
         }
         task.finalizedBy resultsTask
