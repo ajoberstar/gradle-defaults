@@ -86,13 +86,14 @@ class DefaultsPlugin implements Plugin<Project> {
       }
     }
 
-    // push tags before tag is pushed
+    // publish docs before tag is pushed
     rootProject.tasks.reckonTagPush.dependsOn 'gitPublishPush'
 
     rootProject.allprojects { prj ->
       prj.tasks.matching { it.name == 'check' }.all { task ->
-        // make sure tests pass before creating tag
+        // make sure tests pass before creating tag or pushing docs
         rootProject.tasks.reckonTagCreate.dependsOn task
+        rootProject.tasks.gitPublishPush.dependsOn task
       }
     }
   }
