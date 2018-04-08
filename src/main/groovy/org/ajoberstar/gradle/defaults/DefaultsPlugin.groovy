@@ -22,6 +22,7 @@ import org.gradle.api.Task
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.Sync
+import org.gradle.api.tasks.testing.Test
 
 class DefaultsPlugin implements Plugin<Project> {
 
