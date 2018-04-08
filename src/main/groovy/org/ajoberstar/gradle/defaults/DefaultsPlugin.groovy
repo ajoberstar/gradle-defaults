@@ -70,6 +70,20 @@ class DefaultsPlugin implements Plugin<Project> {
       preRelease = stageFromProp('alpha', 'beta', 'rc', 'final')
     }
 
+    // safety checks before releasing
+    rootProject.tasks.reckonTagCreate.doFirst {
+      if (rootProject.grgit.branch.current().name != 'master') {
+        throw new IllegalStateException('Can only release from master.')
+      }
+      if (!rootProject.version.toString().contains('-')) {
+        def head = grgit.head()
+        def tagsOnHead = grgit.tag.list().findAll { it.commit == head }
+        if (!tagsOnHead.find { it.name.startsWith(rootProject.version.toString() + '-rc.')}) {
+          throw new IllegalStateException('Must release an rc before making a final.')
+        }
+      }
+    }
+
     // push tags before tag is pushed
     rootProject.tasks.reckonTagPush.dependsOn 'gitPublishPush'
 
