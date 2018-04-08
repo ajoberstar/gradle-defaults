@@ -91,9 +91,8 @@ class DefaultsPlugin implements Plugin<Project> {
     rootProject.allprojects { prj ->
       prj.tasks.withType(Test) { task ->
         println "Configuring all results for: ${task.path}"
-        println "Copying from: ${task.reports.junitXml.destination}"
-        resultsTask.from(task.reports.junitXml.destination) {
-          def parts = task.path.split(':')
+        resultsTask.from({ task.reports.junitXml.destination }) {
+          def parts = task.path.split(':')[1..-1]
           if (parts.size() == 1) {
             parts = [prj.name] + parts
           }
