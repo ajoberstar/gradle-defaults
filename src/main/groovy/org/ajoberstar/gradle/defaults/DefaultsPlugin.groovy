@@ -88,6 +88,8 @@ class DefaultsPlugin implements Plugin<Project> {
     project.spotless {
       project.plugins.withId('java') {
         java {
+          importOrder 'java', 'javax', ''
+          removeUnusedImports()
           eclipse().configFile(project.rootProject.file('gradle/eclipse-java-formatter.xml'))
         }
       }
@@ -100,7 +102,7 @@ class DefaultsPlugin implements Plugin<Project> {
         }
       }
       format 'gradle', {
-        target '**/build.gradle'
+        target '**/*.gradle'
         trimTrailingWhitespace()
         indentWithSpaces(2)
         endWithNewline()
