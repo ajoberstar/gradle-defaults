@@ -13,7 +13,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0",
+            "locked": "0.6.0-rc.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -25,7 +25,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.1",
+            "locked": "2.2.0-rc.1",
             "requested": "+"
         }
     },
@@ -43,7 +43,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0",
+            "locked": "0.6.0-rc.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -55,7 +55,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.1",
+            "locked": "2.2.0-rc.1",
             "requested": "+"
         }
     },
@@ -73,7 +73,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0",
+            "locked": "0.6.0-rc.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -85,7 +85,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.1",
+            "locked": "2.2.0-rc.1",
             "requested": "+"
         }
     },
@@ -103,7 +103,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0",
+            "locked": "0.6.0-rc.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -115,7 +115,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.1",
+            "locked": "2.2.0-rc.1",
             "requested": "+"
         }
     },
@@ -133,7 +133,7 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.5.0",
+            "locked": "0.6.0-rc.1",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
@@ -145,7 +145,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.1.1",
+            "locked": "2.2.0-rc.1",
             "requested": "+"
         }
     }
