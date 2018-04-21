@@ -13,11 +13,11 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.6.0-rc.1",
+            "locked": "0.6.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
-            "locked": "0.4.0-rc.2",
+            "locked": "0.4.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
@@ -25,7 +25,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.2.0-rc.1",
+            "locked": "2.2.0",
             "requested": "+"
         }
     },
@@ -43,11 +43,11 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.6.0-rc.1",
+            "locked": "0.6.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
-            "locked": "0.4.0-rc.2",
+            "locked": "0.4.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
@@ -55,7 +55,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.2.0-rc.1",
+            "locked": "2.2.0",
             "requested": "+"
         }
     },
@@ -73,11 +73,11 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.6.0-rc.1",
+            "locked": "0.6.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
-            "locked": "0.4.0-rc.2",
+            "locked": "0.4.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
@@ -85,7 +85,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.2.0-rc.1",
+            "locked": "2.2.0",
             "requested": "+"
         }
     },
@@ -103,11 +103,11 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.6.0-rc.1",
+            "locked": "0.6.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
-            "locked": "0.4.0-rc.2",
+            "locked": "0.4.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
@@ -115,7 +115,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.2.0-rc.1",
+            "locked": "2.2.0",
             "requested": "+"
         }
     },
@@ -133,11 +133,11 @@
             "requested": "+"
         },
         "org.ajoberstar.reckon:reckon-gradle": {
-            "locked": "0.6.0-rc.1",
+            "locked": "0.6.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-git-publish": {
-            "locked": "0.4.0-rc.2",
+            "locked": "0.4.0",
             "requested": "+"
         },
         "org.ajoberstar:gradle-stutter": {
@@ -145,7 +145,7 @@
             "requested": "+"
         },
         "org.ajoberstar:grgit": {
-            "locked": "2.2.0-rc.1",
+            "locked": "2.2.0",
             "requested": "+"
         }
     }
