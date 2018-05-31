@@ -4,6 +4,9 @@ import org.gradle.api.Plugin
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.artifacts.Dependency
+import org.gradle.api.artifacts.component.ModuleComponentSelector
+import org.gradle.api.artifacts.result.ResolvedDependencyResult
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.bundling.Jar
 import org.gradle.api.tasks.Sync
@@ -168,6 +171,23 @@ class DefaultsPlugin implements Plugin<Project> {
       // avoid conflict with localGroovy()
       project.configurations.all {
         exclude group: 'org.codehaus.groovy'
+      }
+
+      // use static versions in plugin POMs
+      project.pluginBundle {
+        withDependencies { List<Dependency> deps ->
+          def resolvedDeps = project.configurations.runtimeClasspath.incoming.resolutionResult.allDependencies
+          deps.each { Dependency dep ->
+            String group = dep.groupId
+            String artifact = dep.artifactId
+            ResolvedDependencyResult found = resolvedDeps.find { r ->
+              (r.requested instanceof ModuleComponentSelector) &&
+                  (r.requested.group == group) &&
+                  (r.requested.module == artifact)
+            }
+            dep.version = found.selected.moduleVersion.version
+          }
+        }
       }
     }
   }
