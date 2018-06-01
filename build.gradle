@@ -18,19 +18,19 @@ repositories {
 
 dependencies {
   // gradle
-  compile gradleApi()
-  compile localGroovy()
+  implementation gradleApi()
+  implementation localGroovy()
 
   // my plugins
-  runtime 'org.ajoberstar:grgit:+'
-  runtime 'org.ajoberstar.reckon:reckon-gradle:+'
-  runtime 'org.ajoberstar:gradle-git-publish:+'
-  runtime 'org.ajoberstar:gradle-stutter:+'
+  implementation 'org.ajoberstar:grgit:latest.release'
+  implementation 'org.ajoberstar.reckon:reckon-gradle:latest.release'
+  implementation 'org.ajoberstar:gradle-git-publish:latest.release'
+  implementation 'org.ajoberstar:gradle-stutter:latest.release'
 
   // 3rd party plugins
-  runtime 'com.gradle.publish:plugin-publish-plugin:+'
-  runtime 'com.diffplug.spotless:spotless-plugin-gradle:+'
-  runtime 'com.netflix.nebula:nebula-publishing-plugin:+'
+  implementation 'com.gradle.publish:plugin-publish-plugin:latest.release'
+  implementation 'com.diffplug.spotless:spotless-plugin-gradle:latest.release'
+  implementation 'com.netflix.nebula:nebula-publishing-plugin:latest.release'
 }
 
 publishing {
