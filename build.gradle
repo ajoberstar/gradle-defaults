@@ -22,11 +22,9 @@ buildscript {
 }
 
 plugins {
-  id 'org.ajoberstar.defaults' version '0.12.0-rc.1'
+  id 'org.ajoberstar.defaults' version '0.12.0-rc.3'
   id 'groovy'
   id 'java-gradle-plugin'
-  // TODO remove when Gradle dependency locking is available
-  id 'nebula.dependency-lock' version '5.0.4'
 }
 
 group = 'org.ajoberstar'
@@ -37,6 +35,10 @@ repositories {
     url = 'https://plugins.gradle.org/m2/'
   }
   jcenter()
+}
+
+dependencyLocking {
+  lockAllConfigurations()
 }
 
 dependencies {
@@ -70,8 +72,11 @@ publishing {
 }
 
 stutter {
+  sparse=true
+  includeActiveRc=true
+
   java(8) {
-    compatibleRange '4.6'
+    compatibleRange '4.8-rc-3'
   }
 }
 
