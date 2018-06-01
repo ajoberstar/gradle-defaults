@@ -185,7 +185,9 @@ class DefaultsPlugin implements Plugin<Project> {
                   (r.requested.group == group) &&
                   (r.requested.module == artifact)
             }
-            dep.version = found.selected.moduleVersion.version
+            if (found) {
+              dep.version = found.selected.moduleVersion.version
+            }
           }
         }
       }
