@@ -1,28 +1,5 @@
-buildscript {
-  dependencies {
-    classpath('org.eclipse.jgit:org.eclipse.jgit') {
-      version { strictly '4.11.0.201803080745-r' }
-      because '5.0 has a breaking change that needs to be fixed in grgit'
-    }
-    components.all {
-      allVariants {
-        withDependencies { deps ->
-          deps.each { dep ->
-            if (dep.group == 'org.eclipse.jgit') {
-              dep.version {
-                prefer '4.11.0.201803080745-r'
-              }
-              dep.because '5.0 has a breaking change that needs to be fixed in grgit'
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 plugins {
-  id 'org.ajoberstar.defaults' version '0.12.0-rc.3'
+  id 'org.ajoberstar.defaults' version '0.12.0-rc.4'
   id 'groovy'
   id 'java-gradle-plugin'
 }
