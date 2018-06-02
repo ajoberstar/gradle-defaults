@@ -54,8 +54,8 @@ class DefaultsPlugin implements Plugin<Project> {
     rootProject.plugins.apply('org.ajoberstar.reckon')
 
     rootProject.reckon {
-      normal = scopeFromProp()
-      preRelease = stageFromProp('alpha', 'beta', 'rc', 'final')
+      scopeFromProp()
+      stageFromProp('alpha', 'beta', 'rc', 'final')
     }
 
     // safety checks before releasing
