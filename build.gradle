@@ -4,6 +4,8 @@ plugins {
   id 'java-gradle-plugin'
 }
 
+apply from: 'gradle/locking.gradle'
+
 group = 'org.ajoberstar'
 
 repositories {
@@ -12,10 +14,6 @@ repositories {
     url = 'https://plugins.gradle.org/m2/'
   }
   jcenter()
-}
-
-dependencyLocking {
-  lockAllConfigurations()
 }
 
 dependencies {
