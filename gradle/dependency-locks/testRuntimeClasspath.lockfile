@@ -4,9 +4,9 @@
 com.diffplug.durian:durian-collect:1.2.0
 com.diffplug.durian:durian-core:1.2.0
 com.diffplug.durian:durian-io:1.2.0
-com.diffplug.spotless:spotless-lib-extra:1.13.0
-com.diffplug.spotless:spotless-lib:1.13.0
-com.diffplug.spotless:spotless-plugin-gradle:3.13.0
+com.diffplug.spotless:spotless-lib-extra:1.15.0
+com.diffplug.spotless:spotless-lib:1.15.0
+com.diffplug.spotless:spotless-plugin-gradle:3.15.0
 com.fasterxml.jackson.core:jackson-annotations:2.9.0
 com.fasterxml.jackson.core:jackson-core:2.9.5
 com.fasterxml.jackson.core:jackson-databind:2.9.5
@@ -17,7 +17,7 @@ com.google.guava:guava:25.1-jre
 com.google.j2objc:j2objc-annotations:1.1
 com.googlecode.concurrent-trees:concurrent-trees:2.6.1
 com.googlecode.javaewah:JavaEWAH:1.1.6
-com.gradle.publish:plugin-publish-plugin:0.9.10
+com.gradle.publish:plugin-publish-plugin:0.10.0
 com.jcraft:jsch.agentproxy.connector-factory:0.0.7
 com.jcraft:jsch.agentproxy.core:0.0.9
 com.jcraft:jsch.agentproxy.jsch:0.0.9
@@ -28,9 +28,9 @@ com.jcraft:jsch.agentproxy.usocket-jna:0.0.9
 com.jcraft:jsch.agentproxy.usocket-nc:0.0.9
 com.jcraft:jsch:0.1.54
 com.jcraft:jzlib:1.1.2
-com.netflix.nebula:gradle-contacts-plugin:3.0.1
-com.netflix.nebula:gradle-info-plugin:3.7.1
-com.netflix.nebula:nebula-publishing-plugin:8.1.0
+com.netflix.nebula:gradle-contacts-plugin:4.0.2
+com.netflix.nebula:gradle-info-plugin:4.0.2
+com.netflix.nebula:nebula-publishing-plugin:9.0.2
 com.perforce:p4java:2015.2.1365273
 com.trilead:trilead-ssh2:1.0.0-build220
 commons-codec:commons-codec:1.9
@@ -51,7 +51,7 @@ org.apache.maven:maven-model:3.0.4
 org.checkerframework:checker-qual:2.0.0
 org.codehaus.mojo:animal-sniffer-annotations:1.14
 org.eclipse.jgit:org.eclipse.jgit.ui:4.11.0.201803080745-r
-org.eclipse.jgit:org.eclipse.jgit:4.11.0.201803080745-r
+org.eclipse.jgit:org.eclipse.jgit:5.0.1.201806211838-r
 org.slf4j:slf4j-api:1.7.25
 org.tmatesoft.sqljet:sqljet:1.1.10
 org.tmatesoft.svnkit:svnkit:1.8.12
