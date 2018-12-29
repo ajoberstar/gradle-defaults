@@ -22,7 +22,7 @@ dependencies {
   implementation localGroovy()
 
   // my plugins
-  implementation 'org.ajoberstar:grgit:latest.release'
+  implementation 'org.ajoberstar.grgit:grgit-gradle:latest.release'
   implementation 'org.ajoberstar.reckon:reckon-gradle:latest.release'
   implementation 'org.ajoberstar:gradle-git-publish:latest.release'
   implementation 'org.ajoberstar:gradle-stutter:latest.release'
