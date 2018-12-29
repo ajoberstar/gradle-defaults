@@ -98,14 +98,16 @@ class DefaultsPlugin implements Plugin<Project> {
       }
       project.plugins.withId('groovy') {
         groovy {
-          excludeJava()
           importOrder 'java', 'javax', 'groovy', ''
+          removeUnusedImports()
           greclipse().configFile(project.rootProject.file('gradle/eclipse-java-formatter.xml'))
         }
       }
-      groovyGradle {
+      format 'gradle', {
         target '**/*.gradle'
-        greclipse().configFile(project.rootProject.file('gradle/eclipse-java-formatter.xml'))
+        trimTrailingWhitespace()
+        indentWithSpaces(2)
+        endWithNewline()
       }
     }
   }
