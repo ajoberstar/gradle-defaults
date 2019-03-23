@@ -154,6 +154,16 @@ class DefaultsPlugin implements Plugin<Project> {
             project.plugins.withId('groovy') {
               artifact project.groovydocJar
             }
+
+            // use static versions in poms
+            versionMapping {
+              usage('java-api') {
+                fromResolutionOf('runtimeClasspath')
+              }
+              usage('java-runtime') {
+                fromResolutionResult()
+              }
+            }
           }
         }
       }
@@ -171,25 +181,6 @@ class DefaultsPlugin implements Plugin<Project> {
       // avoid conflict with localGroovy()
       project.configurations.all {
         exclude group: 'org.codehaus.groovy'
-      }
-
-      // use static versions in plugin POMs
-      project.pluginBundle {
-        withDependencies { List<Dependency> deps ->
-          def resolvedDeps = project.configurations.runtimeClasspath.incoming.resolutionResult.allDependencies
-          deps.each { Dependency dep ->
-            String group = dep.groupId
-            String artifact = dep.artifactId
-            ResolvedDependencyResult found = resolvedDeps.find { r ->
-              (r.requested instanceof ModuleComponentSelector) &&
-                  (r.requested.group == group) &&
-                  (r.requested.module == artifact)
-            }
-            if (found) {
-              dep.version = found.selected.moduleVersion.version
-            }
-          }
-        }
       }
     }
   }

@@ -1,5 +1,5 @@
 plugins {
-  id 'org.ajoberstar.defaults' version '0.13.0'
+  id 'org.ajoberstar.defaults' version '0.14.2'
   id 'groovy'
   id 'java-gradle-plugin'
 }
@@ -30,7 +30,6 @@ dependencies {
   // 3rd party plugins
   implementation 'com.gradle.publish:plugin-publish-plugin:latest.release'
   implementation 'com.diffplug.spotless:spotless-plugin-gradle:latest.release'
-  implementation 'com.netflix.nebula:nebula-publishing-plugin:latest.release'
 }
 
 publishing {
