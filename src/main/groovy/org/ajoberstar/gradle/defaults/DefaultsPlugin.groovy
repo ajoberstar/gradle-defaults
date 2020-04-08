@@ -1,6 +1,5 @@
 package org.ajoberstar.gradle.defaults
 
-import org.apache.maven.model.Dependency
 import org.gradle.api.Plugin
 import org.gradle.api.GradleException
 import org.gradle.api.Project
