@@ -3,7 +3,7 @@
 Plugin providing my opinionated defaults for Gradle builds.
 
 [![Download](https://api.bintray.com/packages/ajoberstar/maven/gradle-defaults/images/download.svg)](https://bintray.com/ajoberstar/maven/gradle-defaults/_latestVersion)
-[![CircleCI](https://circleci.com/gh/ajoberstar/gradle-defaults.svg?style=svg)](https://circleci.com/gh/ajoberstar/gradle-defaults)
+![](https://github.com/ajoberstar/gradle-defaults/workflows/.github/workflows/build.yaml/badge.svg)
 
 ## What does it do?
 
