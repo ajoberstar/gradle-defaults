@@ -1,25 +1,20 @@
 # This is a Gradle generated file for dependency locking.
 # Manual edits can break the build and are not advised.
 # This file is expected to be part of source control.
-com.diffplug.durian:durian-collect:1.2.0
-com.diffplug.durian:durian-core:1.2.0
-com.diffplug.durian:durian-io:1.2.0
-com.diffplug.spotless:spotless-lib-extra:1.20.0
-com.diffplug.spotless:spotless-lib:1.20.0
-com.diffplug.spotless:spotless-plugin-gradle:3.20.0
-com.googlecode.concurrent-trees:concurrent-trees:2.6.1
+com.diffplug.spotless:spotless-lib-extra:1.28.1
+com.diffplug.spotless:spotless-lib:1.28.1
+com.diffplug.spotless:spotless-plugin-gradle:3.28.1
 com.googlecode.javaewah:JavaEWAH:1.1.6
-com.gradle.publish:plugin-publish-plugin:0.10.1
-com.jcraft:jsch:0.1.54
+com.gradle.publish:plugin-publish-plugin:0.11.0
+com.jcraft:jsch:0.1.55
 com.jcraft:jzlib:1.1.1
-org.ajoberstar.grgit:grgit-core:3.1.1
-org.ajoberstar.grgit:grgit-gradle:3.1.1
-org.ajoberstar.reckon:reckon-gradle:0.9.0
-org.ajoberstar:gradle-git-publish:2.1.0
-org.ajoberstar:gradle-stutter:0.5.0
-org.apache.maven:maven-model:3.0.4
-org.bouncycastle:bcpg-jdk15on:1.60
-org.bouncycastle:bcpkix-jdk15on:1.60
-org.bouncycastle:bcprov-jdk15on:1.60
-org.eclipse.jgit:org.eclipse.jgit:5.3.0.201903130848-r
+org.ajoberstar.grgit:grgit-core:4.0.1
+org.ajoberstar.grgit:grgit-gradle:4.0.1
+org.ajoberstar.reckon:reckon-gradle:0.12.0
+org.ajoberstar:gradle-git-publish:3.0.0-rc.1
+org.ajoberstar:gradle-stutter:0.5.1
+org.bouncycastle:bcpg-jdk15on:1.64
+org.bouncycastle:bcpkix-jdk15on:1.64
+org.bouncycastle:bcprov-jdk15on:1.64
+org.eclipse.jgit:org.eclipse.jgit:5.6.0.201912101111-r
 org.slf4j:slf4j-api:1.7.2
