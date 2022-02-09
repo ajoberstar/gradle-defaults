@@ -69,8 +69,8 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
 
         pom.developers(devs -> {
           devs.developer(dev -> {
-            dev.getName().set("Andrew Oberstar");
-            dev.getEmail().set("ajoberstar@gmail.com");
+            dev.getName().set(extension.getDeveloperName());
+            dev.getEmail().set(extension.getDeveloperEmail());
           });
         });
 
