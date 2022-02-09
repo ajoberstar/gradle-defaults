@@ -7,7 +7,7 @@ import org.gradle.api.tasks.SourceSetContainer;
 public class LockingConventionPlugin implements Plugin<Project> {
   @Override
   public void apply(Project project) {
-    project.getPluginManager().apply("jvm-ecosystem");
+    project.getPluginManager().apply("java-base");
     var sourceSets = project.getExtensions().getByType(SourceSetContainer.class);
 
     // enable locking on each source sets compileClasspath and runtimeClasspath

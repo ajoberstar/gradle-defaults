@@ -27,7 +27,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
     enableSigning(project, signing);
 
     // sources/javadoc
-    project.getPluginManager().withPlugin("java-base", plugin -> {
+    project.getPluginManager().withPlugin("java", plugin -> {
       var java = project.getExtensions().getByType(JavaPluginExtension.class);
       java.withJavadocJar();
       java.withSourcesJar();
