@@ -1,8 +1,8 @@
 # gradle-defaults
 
-Convention plugins for use in my projects.
+[![CI](https://github.com/ajoberstar/gradle-defaults/actions/workflows/ci.yaml/badge.svg)](https://github.com/ajoberstar/gradle-defaults/actions/workflows/ci.yaml)
 
-![](https://github.com/ajoberstar/gradle-defaults/workflows/.github/workflows/ci.yaml/badge.svg)
+Convention plugins for use in my projects.
 
 ## What does it do?
 
