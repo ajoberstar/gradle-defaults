@@ -32,6 +32,12 @@ dependencies {
 
 gradlePlugin {
   plugins {
+    create("gradlePluginPlugin") {
+      id = "org.ajoberstar.defaults.gradle-plugin"
+      displayName = "ajoberstar's gradle-plugin convention"
+      description = "ajoberstar's gradle-plugin convention"
+      implementationClass = "org.ajoberstar.gradle.defaults.GradlePluginConventionPlugin"
+    }
     create("javaLibraryPlugin") {
       id = "org.ajoberstar.defaults.java-library"
       displayName = "ajoberstar's java-library convention"
