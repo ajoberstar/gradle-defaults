@@ -9,5 +9,6 @@ public class JavaLibraryConventionPlugin implements Plugin<Project> {
     project.getPluginManager().apply(LockingConventionPlugin.class);
     project.getPluginManager().apply(MavenCentralConventionPlugin.class);
     project.getPluginManager().apply(SpotlessConventionPlugin.class);
+    project.getPluginManager().apply("java-library");
   }
 }

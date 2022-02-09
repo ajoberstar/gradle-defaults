@@ -99,7 +99,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
     var signingPassphrase = project.getProviders().gradleProperty("signingPassphrase")
         .forUseAtConfigurationTime();
 
-    signing.setRequired(isCi.get());
-    signing.useInMemoryPgpKeys(signingKey.get(), signingPassphrase.get());
+    signing.setRequired(isCi.getOrNull());
+    signing.useInMemoryPgpKeys(signingKey.getOrNull(), signingPassphrase.getOrNull());
   }
 }
