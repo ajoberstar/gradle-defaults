@@ -16,6 +16,7 @@ In the root project apply the defaults plugin:
 
 ```groovy
 plugins {
+  id 'org.ajoberstar.defaults.java-library' version '<version>'
   id 'org.ajoberstar.defaults.locking' version '<version>'
   id 'org.ajoberstar.defaults.maven-central' version '<version>'
   id 'org.ajoberstar.defaults.spotless' version '<version>'
