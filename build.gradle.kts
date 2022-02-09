@@ -6,7 +6,8 @@ plugins {
   id("org.ajoberstar.reckon")
 }
 
-group = "org.ajoberstar"
+group = "org.ajoberstar.defaults"
+description = "ajoberstar's Gradle convention plugins"
 
 reckon {
   scopeFromProp()
@@ -17,6 +18,8 @@ java {
   toolchain {
     languageVersion.set(JavaLanguageVersion.of(11))
   }
+  withJavadocJar()
+  withSourcesJar()
 }
 
 repositories {
