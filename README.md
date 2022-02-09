@@ -1,9 +1,8 @@
 # gradle-defaults
 
-Plugin providing my opinionated defaults for Gradle builds.
+Convention plugins for use in my projects.
 
-[![Download](https://api.bintray.com/packages/ajoberstar/maven/gradle-defaults/images/download.svg)](https://bintray.com/ajoberstar/maven/gradle-defaults/_latestVersion)
-![](https://github.com/ajoberstar/gradle-defaults/workflows/.github/workflows/build.yaml/badge.svg)
+![](https://github.com/ajoberstar/gradle-defaults/workflows/.github/workflows/ci.yaml/badge.svg)
 
 ## What does it do?
 
@@ -17,10 +16,8 @@ In the root project apply the defaults plugin:
 
 ```groovy
 plugins {
-  id 'org.ajoberstar.defaults' version '<version>'
+  id 'org.ajoberstar.defaults.locking' version '<version>'
+  id 'org.ajoberstar.defaults.maven-central' version '<version>'
+  id 'org.ajoberstar.defaults.spotless' version '<version>'
 }
 ```
-
-## Details
-
-View the [DefaultsPlugin](https://github.com/ajoberstar/gradle-defaults/blob/master/src/main/groovy/org/ajoberstar/gradle/defaults/DefaultsPlugin.groovy) source for what is configured.
