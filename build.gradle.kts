@@ -1,6 +1,7 @@
 plugins {
   id("java-gradle-plugin")
   id("maven-publish")
+  id("signing")
   id("com.diffplug.spotless")
   id("org.ajoberstar.reckon")
 }
@@ -114,6 +115,14 @@ publishing {
       }
     }
   }
+}
+
+signing {
+  setRequired(providers.environmentVariable("CI").forUseAtConfigurationTime().orNull)
+  val signingKey: String? by project
+  val signingPassphrase: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassphrase)
+  sign(publishing.publications["main"])
 }
 
 spotless {
