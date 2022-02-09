@@ -35,21 +35,25 @@ gradlePlugin {
     create("javaLibraryPlugin") {
       id = "org.ajoberstar.defaults.java-library"
       displayName = "ajoberstar's java-library convention"
+      description = "ajoberstar's java-library convention"
       implementationClass = "org.ajoberstar.gradle.defaults.JavaLibraryConventionPlugin"
     }
     create("lockingPlugin") {
       id = "org.ajoberstar.defaults.locking"
       displayName = "ajoberstar's locking convention"
+      description = "ajoberstar's locking convention"
       implementationClass = "org.ajoberstar.gradle.defaults.LockingConventionPlugin"
     }
     create("mavenCentralPlugin") {
       id = "org.ajoberstar.defaults.maven-central"
       displayName = "ajoberstar's Maven Central convention"
+      description = "ajoberstar's Maven Central convention"
       implementationClass = "org.ajoberstar.gradle.defaults.MavenCentralConventionPlugin"
     }
     create("spotlessPlugin") {
       id = "org.ajoberstar.defaults.spotless"
       displayName = "ajoberstar's Spotless convention"
+      description = "ajoberstar's Spotless convention"
       implementationClass = "org.ajoberstar.gradle.defaults.SpotlessConventionPlugin"
     }
   }
