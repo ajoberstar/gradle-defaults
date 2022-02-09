@@ -24,7 +24,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
     // signing
     project.getPluginManager().apply("signing");
     var signing = project.getExtensions().getByType(SigningExtension.class);
-    enableSigning(project, signing);
+    enableSigning(project, signing, publishing);
 
     // sources/javadoc
     project.getPluginManager().withPlugin("java", plugin -> {
@@ -90,7 +90,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
     });
   }
 
-  private void enableSigning(Project project, SigningExtension signing) {
+  private void enableSigning(Project project, SigningExtension signing, PublishingExtension publishing) {
     var isCi = project.getProviders().environmentVariable("CI")
         .forUseAtConfigurationTime();
 
@@ -101,5 +101,6 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
 
     signing.setRequired(isCi.getOrNull());
     signing.useInMemoryPgpKeys(signingKey.getOrNull(), signingPassphrase.getOrNull());
+    signing.sign(publishing.getPublications());
   }
 }
