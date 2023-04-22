@@ -1,6 +1,5 @@
 package org.ajoberstar.gradle.defaults;
 
-import org.ajoberstar.gradle.defaults.tasks.LockTask;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
@@ -11,9 +10,17 @@ public class LockingConventionPlugin implements Plugin<Project> {
       locking.lockAllConfigurations();
     });
 
-    project.getTasks().register("lock", LockTask.class, task -> {
-      task.getIsWriteLocks().set(project.getGradle().getStartParameter().isWriteDependencyLocks());
-      task.getConfigurations().set(project.getConfigurations().matching(conf -> conf.isCanBeResolved()));
+    project.getTasks().register("lock", task -> {
+      task.notCompatibleWithConfigurationCache("needs to access all configurations");
+      task.doLast(t -> {
+        assert project.getGradle().getStartParameter().isWriteDependencyLocks();
+
+        project.getConfigurations().all(configuration -> {
+          if (configuration.isCanBeResolved()) {
+            configuration.resolve();
+          }
+        });
+      });
     });
   }
 }
