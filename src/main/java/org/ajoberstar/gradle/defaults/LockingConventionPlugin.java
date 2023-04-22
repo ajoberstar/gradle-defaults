@@ -13,7 +13,7 @@ public class LockingConventionPlugin implements Plugin<Project> {
 
     project.getTasks().register("lock", LockTask.class, task -> {
       task.getIsWriteLocks().set(project.getGradle().getStartParameter().isWriteDependencyLocks());
-      task.getConfigurations().set(project.getConfigurations());
+      task.getConfigurations().set(project.getConfigurations().matching(conf -> conf.isCanBeResolved()));
     });
   }
 }

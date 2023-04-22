@@ -20,9 +20,7 @@ public abstract class LockTask extends DefaultTask {
 
     var configurations = getConfigurations().get();
     configurations.forEach(conf -> {
-      if (conf.isCanBeResolved()) {
-        conf.resolve();
-      }
+      conf.resolve();
     });
   }
 }
