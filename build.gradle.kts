@@ -3,16 +3,10 @@ plugins {
   id("maven-publish")
   id("signing")
   id("com.diffplug.spotless")
-  id("org.ajoberstar.reckon")
 }
 
 group = "org.ajoberstar.defaults"
 description = "ajoberstar's Gradle convention plugins"
-
-reckon {
-  scopeFromProp()
-  stageFromProp("beta", "final")
-}
 
 java {
   toolchain {
