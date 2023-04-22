@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.diffplug.spotless:spotless-plugin-gradle:6.2.1")
+  implementation("com.diffplug.spotless:spotless-plugin-gradle:6.18.0")
 }
 
 gradlePlugin {
