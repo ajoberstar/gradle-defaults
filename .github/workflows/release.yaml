@@ -18,6 +18,8 @@ jobs:
             11
             17
 
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
       - name: Gradle publish
