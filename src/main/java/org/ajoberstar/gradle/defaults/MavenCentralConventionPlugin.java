@@ -91,11 +91,12 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
   private void enableSigning(Project project, SigningExtension signing, PublishingExtension publishing) {
     var isCi = project.getProviders().environmentVariable("CI");
 
+    var signingKeyId = project.getProviders().gradleProperty("signingKeyId");
     var signingKey = project.getProviders().gradleProperty("signingKey");
     var signingPassphrase = project.getProviders().gradleProperty("signingPassphrase");
 
     signing.setRequired(isCi.getOrNull());
-    signing.useInMemoryPgpKeys(signingKey.getOrNull(), signingPassphrase.getOrNull());
+    signing.useInMemoryPgpKeys(signingKeyId.getOrNull(), signingKey.getOrNull(), signingPassphrase.getOrNull());
     signing.sign(publishing.getPublications());
   }
 }

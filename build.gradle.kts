@@ -122,9 +122,10 @@ publishing {
 
 signing {
   setRequired(providers.environmentVariable("CI").orNull)
+  val signingKeyId: String? by project
   val signingKey: String? by project
   val signingPassphrase: String? by project
-  useInMemoryPgpKeys(signingKey, signingPassphrase)
+  useInMemoryPgpKeys(signingKeyId, signingKey, signingPassphrase)
   sign(publishing.publications)
 }
 
