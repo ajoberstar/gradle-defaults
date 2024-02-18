@@ -10,7 +10,7 @@ description = "ajoberstar's Gradle convention plugins"
 
 java {
   toolchain {
-    languageVersion.set(JavaLanguageVersion.of(17))
+    languageVersion.set(JavaLanguageVersion.of(21))
   }
   withJavadocJar()
   withSourcesJar()
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-  implementation("com.diffplug.spotless:spotless-plugin-gradle:6.18.0")
+  implementation("com.diffplug.spotless:spotless-plugin-gradle:6.25.0")
 }
 
 gradlePlugin {
@@ -65,10 +65,8 @@ publishing {
       name = "CentralReleases"
       url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
       credentials {
-        username = providers.environmentVariable("OSSRH_USERNAME")
-                .forUseAtConfigurationTime().orNull
-        password = providers.environmentVariable("OSSRH_PASSWORD")
-                .forUseAtConfigurationTime().orNull
+        username = providers.environmentVariable("OSSRH_USERNAME").orNull
+        password = providers.environmentVariable("OSSRH_PASSWORD").orNull
       }
     }
 
@@ -76,10 +74,8 @@ publishing {
       name = "CentralSnapshots"
       url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
       credentials {
-        username = providers.environmentVariable("OSSRH_USERNAME")
-                .forUseAtConfigurationTime().orNull
-        password = providers.environmentVariable("OSSRH_PASSWORD")
-                .forUseAtConfigurationTime().orNull
+        username = providers.environmentVariable("OSSRH_USERNAME").orNull
+        password = providers.environmentVariable("OSSRH_PASSWORD").orNull
       }
     }
   }
@@ -125,7 +121,7 @@ publishing {
 }
 
 signing {
-  setRequired(providers.environmentVariable("CI").forUseAtConfigurationTime().orNull)
+  setRequired(providers.environmentVariable("CI").orNull)
   val signingKey: String? by project
   val signingPassphrase: String? by project
   useInMemoryPgpKeys(signingKey, signingPassphrase)

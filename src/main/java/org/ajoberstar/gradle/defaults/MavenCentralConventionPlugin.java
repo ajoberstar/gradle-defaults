@@ -40,10 +40,8 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
         repo.setName("CentralReleases");
         repo.setUrl(URI.create("https://oss.sonatype.org/service/local/staging/deploy/maven2/"));
         repo.credentials(creds -> {
-          var username = project.getProviders().environmentVariable("OSSRH_USERNAME")
-              .forUseAtConfigurationTime();
-          var password = project.getProviders().environmentVariable("OSSRH_PASSWORD")
-              .forUseAtConfigurationTime();
+          var username = project.getProviders().environmentVariable("OSSRH_USERNAME");
+          var password = project.getProviders().environmentVariable("OSSRH_PASSWORD");
           creds.setUsername(username.getOrNull());
           creds.setPassword(password.getOrNull());
         });
@@ -91,13 +89,10 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
   }
 
   private void enableSigning(Project project, SigningExtension signing, PublishingExtension publishing) {
-    var isCi = project.getProviders().environmentVariable("CI")
-        .forUseAtConfigurationTime();
+    var isCi = project.getProviders().environmentVariable("CI");
 
-    var signingKey = project.getProviders().gradleProperty("signingKey")
-        .forUseAtConfigurationTime();
-    var signingPassphrase = project.getProviders().gradleProperty("signingPassphrase")
-        .forUseAtConfigurationTime();
+    var signingKey = project.getProviders().gradleProperty("signingKey");
+    var signingPassphrase = project.getProviders().gradleProperty("signingPassphrase");
 
     signing.setRequired(isCi.getOrNull());
     signing.useInMemoryPgpKeys(signingKey.getOrNull(), signingPassphrase.getOrNull());
