@@ -1,7 +1,7 @@
 pluginManagement {
   plugins {
-    id("org.ajoberstar.reckon.settings") version "0.18.2"
-    id("com.diffplug.spotless") version "6.25.0"
+    id("org.ajoberstar.reckon.settings") version "0.19.2"
+    id("com.diffplug.spotless") version "7.0.3"
   }
 
   repositories {
