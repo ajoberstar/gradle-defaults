@@ -41,3 +41,4 @@ jobs:
           username: ${{ secrets.CENTRAL_USERNAME }}
           token: ${{ secrets.CENTRAL_TOKEN }}
           bundle-path: bundle.zip
+          name: ${{ github.repository }}@${{ github.ref }}
