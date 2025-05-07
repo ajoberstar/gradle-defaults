@@ -60,22 +60,12 @@ gradlePlugin {
 }
 
 publishing {
-  repositories {
-    maven {
-      name = "CentralReleases"
-      url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
-      credentials {
-        username = providers.environmentVariable("OSSRH_USERNAME").orNull
-        password = providers.environmentVariable("OSSRH_PASSWORD").orNull
-      }
-    }
-
-    maven {
-      name = "CentralSnapshots"
-      url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
-      credentials {
-        username = providers.environmentVariable("OSSRH_USERNAME").orNull
-        password = providers.environmentVariable("OSSRH_PASSWORD").orNull
+  val bundlePath = providers.environmentVariable("BUNDLE_REPO")
+  if (bundlePath.isPresent()) {
+    repositories {
+      maven {
+        name = "Central"
+        url = uri(bundlePath)
       }
     }
   }

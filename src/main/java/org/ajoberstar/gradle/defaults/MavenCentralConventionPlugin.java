@@ -35,18 +35,15 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
   }
 
   private void configureRepositories(Project project, PublishingExtension publishing) {
-    publishing.repositories(repos -> {
-      repos.maven(repo -> {
-        repo.setName("CentralReleases");
-        repo.setUrl(URI.create("https://oss.sonatype.org/service/local/staging/deploy/maven2/"));
-        repo.credentials(creds -> {
-          var username = project.getProviders().environmentVariable("OSSRH_USERNAME");
-          var password = project.getProviders().environmentVariable("OSSRH_PASSWORD");
-          creds.setUsername(username.getOrNull());
-          creds.setPassword(password.getOrNull());
+    var path = project.getProviders().environmentVariable("BUNDLE_REPO");
+    if (path.isPresent()) {
+      publishing.repositories(repos -> {
+        repos.maven(repo -> {
+          repo.setName("Central");
+          repo.setUrl(path.map(URI::create));
         });
       });
-    });
+    }
   }
 
   private void configurePom(Project project, PublishingExtension publishing, MavenCentralExtension extension) {
