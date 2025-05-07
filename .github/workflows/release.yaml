@@ -34,7 +34,7 @@ jobs:
       - name: Create bundle
         run: zip -r bundle.zip .bundle/*
       - name: Publish to Maven Central
-        uses: ajoberstar/maven-central-publish@master
+        uses: ajoberstar/maven-central-publish@main
         with:
           username: ${{ secrets.CENTRAL_USERNAME }}
           token: ${{ secrets.CENTRAL_TOKEN }}
