@@ -40,7 +40,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
       publishing.repositories(repos -> {
         repos.maven(repo -> {
           repo.setName("Central");
-          repo.setUrl(path.map(URI::create));
+          repo.setUrl(project.uri(path));
         });
       });
     }
