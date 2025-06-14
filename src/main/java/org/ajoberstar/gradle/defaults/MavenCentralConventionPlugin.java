@@ -36,7 +36,7 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
 
   private void configureRepositories(Project project, PublishingExtension publishing) {
     var path = project.getProviders().environmentVariable("BUNDLE_REPO");
-    var uri = project.getRootProject().uri(path);
+    var uri = path.map(p -> project.getRootProject().uri(p));
     if (path.isPresent()) {
       publishing.repositories(repos -> {
         repos.maven(repo -> {
