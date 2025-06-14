@@ -36,11 +36,12 @@ public class MavenCentralConventionPlugin implements Plugin<Project> {
 
   private void configureRepositories(Project project, PublishingExtension publishing) {
     var path = project.getProviders().environmentVariable("BUNDLE_REPO");
+    var uri = project.getRootProject().uri(path);
     if (path.isPresent()) {
       publishing.repositories(repos -> {
         repos.maven(repo -> {
           repo.setName("Central");
-          repo.setUrl(project.uri(path));
+          repo.setUrl(uri);
         });
       });
     }
