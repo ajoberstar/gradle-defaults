@@ -4,6 +4,9 @@
 
 Convention plugins for use in my projects.
 
+> [!IMPORTANT]
+> This plugin is now maintained on [SourceHut](https://git.sr.ht/~ajoberstar/gradle-defaults).
+
 ## What does it do?
 
 This project tracks _my own_ preferences for Gradle defaults. It will follow SemVer for breaking changes (prior to 1.0.0, minors may include breaking changes).
